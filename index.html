@@ -1,618 +1,1604 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0266)file:///C:/Users/Logcomex/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/d0a97419-c7a1-4b7b-889c-1b1ce7f3cd84/6d58792f-76b7-4784-8561-6587c96b4c1d/local_04d44be2-f969-41db-bd37-e37e6897074f/outputs/guia-testes-v2.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>Guia de Testes — Formulário de Pagamentos | Logcomex</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Funnel+Display:wght@700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#F5F6FC;font-family:'Poppins',sans-serif;font-size:14px;color:#0B0D19;line-height:1.6}
+  @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Poppins:wght@300;400;500;600;700&display=swap');
+  :root {
+    --lx-primary-darkest: #2D085D;
+    --lx-primary-dark: #5B11BA;
+    --lx-primary-pure: #6613D0;
+    --lx-primary-light: #8E44ED;
+    --lx-primary-lightest: #E2D0FA;
+    --lx-secondary-pure: #FE8F1C;
+    --lx-secondary-lightest: #FEE5CC;
+    --lx-neutral-pure: #0B0D19;
+    --lx-neutral-600: #5F616A;
+    --lx-neutral-400: #C0C1C9;
+    --lx-neutral-200: #E0E1EB;
+    --lx-off-white: #F5F6FC;
+    --lx-bg-sunken: #EDEEF6;
+    --lx-green: #1FAC66;
+    --lx-red: #C70404;
+    --lx-yellow: #FCC502;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Poppins', -apple-system, sans-serif;
+    background: var(--lx-off-white);
+    color: var(--lx-neutral-pure);
+    line-height: 1.5;
+    font-size: 14px;
+  }
+  h1, h2, h3 { font-family: 'Funnel Display', sans-serif; letter-spacing: -0.01em; }
+  h1 { font-size: 28px; font-weight: 600; }
+  h2 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+  h3 { font-size: 16px; font-weight: 600; }
+  a { color: var(--lx-primary-pure); text-decoration: none; }
+  a:hover { text-decoration: underline; }
 
-.header{background:linear-gradient(135deg,#2D085D,#6613D0);padding:32px;color:#fff}
-.header-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:18px}
-.header-text .tag{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;opacity:.7;margin-bottom:6px}
-.header-text h1{font-family:'Funnel Display',sans-serif;font-size:24px;line-height:1.2}
-.header-text p{font-size:12px;opacity:.75;margin-top:6px}
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
 
-.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--lx-primary-darkest) 0%, var(--lx-primary-dark) 100%);
+    color: white;
+    padding: 32px 24px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '✦';
+    position: absolute;
+    top: 18px; right: 30px;
+    color: var(--lx-primary-lightest);
+    font-size: 32px;
+    opacity: 0.5;
+  }
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 11px;
+    color: var(--lx-primary-lightest);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .header h1 { color: white; font-size: 30px; line-height: 1.15; max-width: 720px; }
+  .header .sub { color: var(--lx-primary-lightest); font-size: 14px; margin-top: 10px; max-width: 720px; }
 
-.card{background:#fff;border-radius:14px;border:1px solid rgba(11,13,25,.08);padding:24px 28px;margin-bottom:20px}
-.card-title{font-family:'Funnel Display',sans-serif;font-size:17px;color:#2D085D;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.card-title .icon{width:36px;height:36px;border-radius:9px;background:#F3EDFC;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.card p{color:#5F616A;font-size:13px;line-height:1.7}
+  /* Card */
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 1px 2px rgba(11,13,25,0.04), 0 1px 8px rgba(11,13,25,0.04);
+    border: 1px solid var(--lx-neutral-200);
+    margin-bottom: 18px;
+  }
+  .card-h {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px;
+  }
+  .card-h .icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--lx-primary-lightest);
+    color: var(--lx-primary-pure);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .card-h h2 { margin: 0; }
 
-.link-box{display:inline-flex;align-items:center;gap:10px;background:#F3EDFC;border:1.5px solid #E2D0FA;border-radius:10px;padding:12px 18px;margin-top:10px}
-.link-box a{font-weight:600;color:#6613D0;text-decoration:none;font-size:14px}
-.link-box a:hover{text-decoration:underline}
+  /* KPIs */
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .kpi {
+    background: white;
+    border-radius: 14px;
+    padding: 16px 18px;
+    border: 1px solid var(--lx-neutral-200);
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--lx-neutral-600);
+    font-weight: 600;
+  }
+  .kpi .value {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-top: 4px;
+  }
+  .kpi .pct {
+    font-size: 11px;
+    color: var(--lx-neutral-600);
+    margin-top: 2px;
+  }
+  .kpi.ok .value { color: var(--lx-green); }
+  .kpi.parcial .value { color: var(--lx-secondary-pure); }
+  .kpi.erro .value { color: var(--lx-red); }
+  .kpi.taxa .value { color: var(--lx-primary-pure); }
+  .kpi::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--lx-primary-pure), var(--lx-primary-light));
+  }
+  .kpi.ok::after { background: var(--lx-green); }
+  .kpi.parcial::after { background: var(--lx-secondary-pure); }
+  .kpi.erro::after { background: var(--lx-red); }
 
-/* ── REGISTRO ── */
-.reg-tabs{display:flex;gap:6px;margin-bottom:16px}
-.reg-tab{padding:7px 18px;border-radius:8px;border:1.5px solid rgba(11,13,25,.1);background:#fff;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:#5F616A;cursor:pointer;transition:all .15s}
-.reg-tab.active{background:#6613D0;border-color:#6613D0;color:#fff}
+  @media (max-width: 900px) {
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+  }
 
-/* modo unitário */
-.reg-form{background:#FAFAFE;border-radius:10px;border:1px solid #E2D0FA;padding:16px 18px}
-.reg-row3{display:grid;grid-template-columns:140px 1fr 216px;gap:12px;margin-bottom:10px}
-.reg-row2{display:grid;grid-template-columns:1fr 160px;gap:12px;margin-bottom:10px}
-.reg-field label{display:block;font-size:10px;font-weight:700;color:#2D085D;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
-.reg-field input,.reg-field select,.reg-field textarea{width:100%;font-family:'Poppins',sans-serif;font-size:12px;border:1.5px solid rgba(11,13,25,.1);border-radius:7px;padding:8px 11px;background:#fff;color:#0B0D19;outline:none;transition:border .2s;resize:none}
-.reg-field input:focus,.reg-field select:focus,.reg-field textarea:focus{border-color:#6613D0}
-.status-btns{display:flex;gap:6px}
-.status-btn{flex:1;border:2px solid rgba(11,13,25,.1);border-radius:7px;background:#fff;font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;padding:8px 4px;cursor:pointer;transition:all .15s}
-.s-ok.selected{background:#E8F8F0;border-color:#1FAC66;color:#0D5C36}
-.s-parcial.selected{background:#FFF3E0;border-color:#FE8F1C;color:#7A3B00}
-.s-erro.selected{background:#FDEAEA;border-color:#C70404;color:#C70404}
+  /* Painel analítico */
+  .painel { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+  @media (max-width: 900px) { .painel { grid-template-columns: 1fr; } }
+  .painel .card { margin-bottom: 0; }
 
-/* modo lote */
-.lote-hint{font-size:12px;color:#5F616A;margin-bottom:12px;line-height:1.6}
-.lote-row{display:grid;grid-template-columns:110px 1fr 1fr 130px 110px 28px;gap:8px;align-items:center;margin-bottom:8px}
-.lote-row input,.lote-row select{font-family:'Poppins',sans-serif;font-size:11px;border:1.5px solid rgba(11,13,25,.1);border-radius:6px;padding:7px 9px;background:#fff;color:#0B0D19;outline:none;width:100%}
-.lote-row input:focus,.lote-row select:focus{border-color:#6613D0}
-.lote-head{display:grid;grid-template-columns:110px 1fr 1fr 130px 110px 28px;gap:8px;margin-bottom:6px}
-.lote-head span{font-size:10px;font-weight:700;color:#2D085D;text-transform:uppercase;letter-spacing:.04em}
-.btn-add-lote-row{background:none;border:1.5px dashed #E2D0FA;border-radius:6px;color:#6613D0;font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;padding:7px 14px;cursor:pointer;margin-top:4px}
-.btn-add-lote-row:hover{background:#F3EDFC}
-.btn-del-lote{background:none;border:none;cursor:pointer;color:#ccc;font-size:14px;line-height:1}
-.btn-del-lote:hover{color:#C70404}
+  .ranking {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .ranking-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 10px;
+    background: var(--lx-bg-sunken);
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  .ranking-item .name {
+    flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-weight: 500;
+  }
+  .ranking-item .count {
+    background: var(--lx-red);
+    color: white;
+    border-radius: 999px;
+    padding: 2px 9px;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 28px;
+    text-align: center;
+  }
+  .ranking-item .count.parcial { background: var(--lx-secondary-pure); }
+  .ranking-item .count.ok { background: var(--lx-green); }
+  .ranking-item .count.total { background: var(--lx-primary-pure); }
+  .ranking-item .bar {
+    width: 80px; height: 6px; background: var(--lx-neutral-200);
+    border-radius: 3px; overflow: hidden; margin-right: 10px;
+  }
+  .ranking-item .bar > div {
+    height: 100%; background: var(--lx-red); border-radius: 3px;
+  }
+  .empty {
+    text-align: center; padding: 20px; color: var(--lx-neutral-600);
+    font-size: 13px; font-style: italic;
+  }
 
-.btn-reg-add{background:#6613D0;color:#fff;border:none;border-radius:8px;padding:9px 22px;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:background .15s}
-.btn-reg-add:hover{background:#2D085D}
+  .cats {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+  }
+  .cat-tile {
+    background: var(--lx-bg-sunken);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  .cat-tile .cat-label { color: var(--lx-neutral-600); margin-bottom: 4px; font-weight: 500; }
+  .cat-tile .cat-value { font-size: 20px; font-weight: 600; font-family: 'Funnel Display', sans-serif; }
 
-/* tabela */
-.reg-table-wrap{margin-top:20px}
-.reg-table-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.reg-table-title{font-size:11px;font-weight:700;color:#2D085D;text-transform:uppercase;letter-spacing:.06em}
-.reg-count{font-size:11px;color:#5F616A}
-.reg-scroll{overflow-x:auto}
-.reg-table{width:100%;border-collapse:collapse;font-size:11px}
-.reg-table thead tr{background:#F3EDFC}
-.reg-table th{color:#2D085D;font-weight:700;padding:8px 12px;text-align:left;white-space:nowrap;border-bottom:2px solid #E2D0FA}
-.reg-table td{padding:8px 12px;border-bottom:1px solid #F5F3FC;vertical-align:top;line-height:1.45}
-.reg-table tr:hover td{background:#FAFAFE}
-.tag-ok{background:#E8F8F0;color:#0D5C36;font-weight:600;padding:2px 8px;border-radius:20px;font-size:10px;white-space:nowrap}
-.tag-parcial{background:#FFF3E0;color:#7A3B00;font-weight:600;padding:2px 8px;border-radius:20px;font-size:10px;white-space:nowrap}
-.tag-erro{background:#FDEAEA;color:#C70404;font-weight:600;padding:2px 8px;border-radius:20px;font-size:10px;white-space:nowrap}
-.btn-del-reg{background:none;border:none;cursor:pointer;color:#ddd;font-size:13px}
-.btn-del-reg:hover{color:#C70404}
-.empty-msg{text-align:center;padding:24px 0;font-size:12px;color:#bbb}
+  /* Form */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .form-grid.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  @media (max-width: 700px) { .form-grid, .form-grid.cols-3, .form-grid.cols-4 { grid-template-columns: 1fr; } }
+  .form-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 4px; }
+  .form-group label {
+    font-size: 12px; font-weight: 600;
+    color: var(--lx-neutral-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .form-group .hint { font-size: 11px; color: var(--lx-neutral-600); font-weight: 400; text-transform: none; letter-spacing: 0; }
+  .input, select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--lx-neutral-200);
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    background: white;
+  }
+  .input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--lx-primary-pure);
+    box-shadow: 0 0 0 3px rgba(102,19,208,0.12);
+  }
+  textarea { resize: vertical; min-height: 60px; font-family: 'Poppins', sans-serif; }
 
-/* ── DASHBOARD RESUMO ── */
-.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-.stat-card{border-radius:12px;padding:14px 12px;text-align:center;border:1.5px solid}
-.stat-num{font-family:'Funnel Display',sans-serif;font-size:26px;font-weight:800;line-height:1}
-.stat-lbl{font-size:11px;font-weight:600;margin-top:5px;letter-spacing:.02em}
-.stat-total{background:#F3EDFC;border-color:#E2D0FA;color:#2D085D}
-.stat-ok{background:#E8F8F0;border-color:#1FAC66;color:#0D5C36}
-.stat-parcial{background:#FFF3E0;border-color:#FE8F1C;color:#7A3B00}
-.stat-erro{background:#FDEAEA;border-color:#C70404;color:#C70404}
-@media(max-width:560px){.stats-bar{grid-template-columns:repeat(2,1fr)}}
+  /* Status pills */
+  .status-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    padding: 7px 14px;
+    border: 1.5px solid var(--lx-neutral-200);
+    border-radius: 999px;
+    background: white;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s;
+  }
+  .pill:hover { border-color: var(--lx-primary-light); }
+  .pill.active { background: var(--lx-primary-pure); color: white; border-color: var(--lx-primary-pure); }
+  .pill.active.ok { background: var(--lx-green); border-color: var(--lx-green); }
+  .pill.active.parcial { background: var(--lx-secondary-pure); border-color: var(--lx-secondary-pure); }
+  .pill.active.erro { background: var(--lx-red); border-color: var(--lx-red); }
+  .pill.active.sev-blq { background: var(--lx-red); border-color: var(--lx-red); }
+  .pill.active.sev-cnt { background: var(--lx-secondary-pure); border-color: var(--lx-secondary-pure); }
+  .pill.active.sev-csm { background: var(--lx-neutral-600); border-color: var(--lx-neutral-600); }
 
-/* ── FEEDBACK GERAL ── */
-.fb-section{margin-bottom:20px}
-.fb-section-title{font-size:11px;font-weight:700;color:#6613D0;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.fb-textarea{width:100%;font-family:'Poppins',sans-serif;font-size:13px;border:1.5px solid rgba(11,13,25,.1);border-radius:8px;padding:10px 14px;background:#fff;color:#0B0D19;outline:none;resize:vertical;min-height:80px;transition:border .2s}
-.fb-textarea:focus{border-color:#6613D0}
+  /* Buttons */
+  .btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.15s;
+  }
+  .btn.primary {
+    background: var(--lx-primary-pure);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102,19,208,0.25);
+  }
+  .btn.primary:hover {
+    background: var(--lx-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(102,19,208,0.35);
+  }
+  .btn.secondary {
+    background: white;
+    color: var(--lx-primary-pure);
+    border: 1px solid var(--lx-neutral-200);
+  }
+  .btn.secondary:hover { border-color: var(--lx-primary-pure); }
+  .btn.ghost {
+    background: transparent;
+    color: var(--lx-neutral-600);
+    border: 1px solid var(--lx-neutral-200);
+  }
+  .btn.ghost:hover { color: var(--lx-primary-pure); border-color: var(--lx-primary-pure); }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
 
-.select-cards{display:grid;gap:8px}
-.select-card{border:2px solid rgba(11,13,25,.08);border-radius:10px;padding:10px 14px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:10px}
-.select-card:hover{border-color:#6613D0;background:#F3EDFC}
-.select-card.selected{border-color:#6613D0;background:#F3EDFC}
-.select-card .sc-emoji{font-size:18px;flex-shrink:0}
-.select-card .sc-label{font-size:12px;font-weight:600;color:#0B0D19}
-.select-card .sc-desc{font-size:11px;color:#5F616A;margin-top:1px}
+  /* Tabs */
+  .tabs {
+    display: flex; gap: 4px;
+    border-bottom: 1px solid var(--lx-neutral-200);
+    margin-bottom: 16px;
+  }
+  .tab-btn {
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    color: var(--lx-neutral-600);
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .tab-btn.active {
+    color: var(--lx-primary-pure);
+    border-bottom-color: var(--lx-primary-pure);
+    font-weight: 600;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
 
-.nps-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
-.nps-btn{min-width:42px;height:42px;border-radius:8px;border:2px solid rgba(11,13,25,.08);background:#fff;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;cursor:pointer;color:#5F616A;transition:all .15s}
-.nps-btn:hover{border-color:#6613D0;background:#F3EDFC;color:#6613D0}
-.nps-btn.selected{background:#6613D0;border-color:#6613D0;color:#fff}
-.nps-labels{display:flex;justify-content:space-between;font-size:10px;color:#aaa;margin-top:4px}
+  /* Filters */
+  .filters {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 12px;
+    padding: 12px;
+    background: var(--lx-bg-sunken);
+    border-radius: 10px;
+  }
+  .filters .filter-group {
+    flex: 1; min-width: 140px;
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .filters label {
+    font-size: 10px;
+    color: var(--lx-neutral-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  .filters select, .filters input {
+    padding: 7px 9px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
 
-.fb-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  /* Tabela */
+  .tbl-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--lx-neutral-200);
+  }
+  th {
+    background: var(--lx-bg-sunken);
+    font-weight: 600;
+    color: var(--lx-neutral-600);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: sticky; top: 0;
+  }
+  tr:hover { background: var(--lx-off-white); }
+  .status-badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .status-badge.ok { background: rgba(31,172,102,0.15); color: var(--lx-green); }
+  .status-badge.parcial { background: rgba(254,143,28,0.15); color: var(--lx-secondary-pure); }
+  .status-badge.erro { background: rgba(199,4,4,0.12); color: var(--lx-red); }
+  .meta-chip {
+    display: inline-block;
+    padding: 2px 7px;
+    background: var(--lx-primary-lightest);
+    color: var(--lx-primary-darkest);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    margin-right: 4px;
+  }
+  .row-actions {
+    display: flex; gap: 6px;
+    opacity: 0.6;
+  }
+  tr:hover .row-actions { opacity: 1; }
+  .row-actions button {
+    border: none; background: transparent; cursor: pointer;
+    color: var(--lx-neutral-600); font-size: 14px;
+    padding: 4px 6px; border-radius: 4px;
+  }
+  .row-actions button:hover { background: var(--lx-bg-sunken); color: var(--lx-red); }
 
-.btn-fb-submit{background:linear-gradient(135deg,#2D085D,#6613D0);color:#fff;border:none;border-radius:8px;padding:11px 28px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:4px}
-.btn-fb-submit:hover{opacity:.9}
-.fb-saved{display:none;font-size:12px;color:#1FAC66;font-weight:600;margin-top:10px;align-items:center;gap:6px}
-.fb-saved.show{display:flex}
+  /* Lote */
+  .lote-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 1fr 1fr 100px 30px;
+    gap: 6px;
+    margin-bottom: 5px;
+  }
+  .lote-row input, .lote-row select { font-size: 12px; padding: 7px 8px; }
+  .lote-row button {
+    background: transparent; border: none; cursor: pointer;
+    color: var(--lx-red); font-size: 16px;
+  }
+  @media (max-width: 700px) { .lote-row { grid-template-columns: 1fr; } }
 
-.footer{text-align:center;margin-top:32px;font-size:11px;color:#bbb;padding-top:20px;border-top:1px solid #E2D0FA}
-.footer span{color:#6613D0;font-weight:600}
+  /* Feedback */
+  .nota-slider { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nota-btn {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    border: 1.5px solid var(--lx-neutral-200);
+    background: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .nota-btn:hover { border-color: var(--lx-primary-light); }
+  .nota-btn.active {
+    background: var(--lx-primary-pure);
+    color: white;
+    border-color: var(--lx-primary-pure);
+  }
+  .comp-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;
+  }
+  @media (max-width: 700px) { .comp-grid { grid-template-columns: repeat(3, 1fr); } }
+  .comp-btn {
+    padding: 12px 6px;
+    border-radius: 10px;
+    border: 1.5px solid var(--lx-neutral-200);
+    background: white;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;
+  }
+  .comp-btn:hover { border-color: var(--lx-primary-light); }
+  .comp-btn.active { background: var(--lx-primary-pure); color: white; border-color: var(--lx-primary-pure); }
+  .comp-btn .emoji { font-size: 24px; display: block; margin-bottom: 4px; }
 
-.toast{position:fixed;bottom:24px;right:24px;background:#1FAC66;color:#fff;font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;padding:10px 18px;border-radius:8px;opacity:0;transform:translateY(8px);transition:all .3s;z-index:999;pointer-events:none}
-.toast.show{opacity:1;transform:translateY(0)}
-.toast.err{background:#C70404}
+  .alert {
+    padding: 10px 14px;
+    background: rgba(31,172,102,0.1);
+    color: var(--lx-green);
+    border-radius: 8px;
+    border: 1px solid rgba(31,172,102,0.3);
+    font-size: 13px;
+    margin-top: 10px;
+    display: none;
+  }
+  .alert.show { display: block; }
+  .alert.warn { background: rgba(254,143,28,0.1); color: var(--lx-secondary-pure); border-color: rgba(254,143,28,0.3); }
 
-@media(max-width:680px){
-  .reg-row3{grid-template-columns:1fr}
-  .reg-row2{grid-template-columns:1fr}
-  .lote-row,.lote-head{grid-template-columns:1fr 1fr}
-  .fb-grid2{grid-template-columns:1fr}
-}
+  .conditional { display: none; }
+  .conditional.show { display: contents; }
+  .conditional.show.block { display: block; }
+
+  .footer {
+    margin-top: 30px;
+    padding: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--lx-neutral-600);
+  }
+
+  /* Print fingerprint - estilo */
+  .fingerprint {
+    font-size: 11px;
+    color: var(--lx-neutral-600);
+    background: var(--lx-bg-sunken);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-top: 8px;
+    font-family: monospace;
+  }
+
+  /* Chart - barras simples */
+  .chart-bars {
+    display: flex; flex-direction: column; gap: 6px;
+    max-height: 320px; overflow-y: auto;
+  }
+  .chart-bar-row {
+    display: grid;
+    grid-template-columns: 170px 1fr 36px;
+    gap: 10px; align-items: center;
+    font-size: 12px;
+  }
+  .chart-bar-row .label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .chart-bar-row .bar-container {
+    height: 18px;
+    background: var(--lx-bg-sunken);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+  }
+  .chart-bar-row .seg-ok { background: var(--lx-green); }
+  .chart-bar-row .seg-parcial { background: var(--lx-secondary-pure); }
+  .chart-bar-row .seg-erro { background: var(--lx-red); }
+  .chart-bar-row .count {
+    font-weight: 600; text-align: right;
+    color: var(--lx-neutral-600); font-size: 11px;
+  }
 </style>
 </head>
 <body>
 
 <div class="header">
   <div class="header-inner">
-    <svg viewBox="0 0 23.34 23.21" width="48" height="48" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
-      <path d="M22.3405 18.0675H17.2352V23.1429H22.3405V18.0675Z" fill="#fff"/>
-      <path d="M5.10529 6.64643L0 11.7254V18.0891C0 20.8816 2.27851 23.1467 5.08749 23.1467H11.4887L16.594 18.0714H5.10529V6.64643Z" fill="#fff"/>
-      <path d="M17.2311 6.01289V17.4343L22.3364 12.3589V0.9375H10.8513L5.746 6.01289H17.2311Z" fill="#E2D0FA"/>
-    </svg>
-    <div class="header-text">
-      <div class="tag">Logcomex · Contas a Pagar</div>
-      <h1>Guia de Testes — Novo Formulário de Pagamentos</h1>
-      <p>Período de testes: 2 semanas &nbsp;·&nbsp; Seus registros são salvos automaticamente</p>
-    </div>
+    <div class="eyebrow">Logcomex · Contas a Pagar</div>
+    <h1>Guia de Testes — Novo Formulário de Pagamentos</h1>
+    <p class="sub">Período de testes: 2 semanas · Seus registros são salvos automaticamente no navegador.<br>Toda informação aqui ajuda o time CP a corrigir bugs e medir maturidade.</p>
   </div>
 </div>
 
-<div class="wrap">
+<div class="container">
 
-  <!-- Acesso -->
+  <!-- Acesso ao formulário -->
   <div class="card">
-    <div class="card-title"><div class="icon">🔗</div>Acesso ao formulário</div>
-    <p>Use seu e-mail corporativo Logcomex para fazer login. Em caso de problema de acesso, fale com Kamilla ou Thaiane (CP).</p>
-    <div class="link-box">
-      <span>🔗</span>
-      <a href="https://formulario-pagamentos.pages.dev/" target="_blank">formulario-pagamentos.pages.dev</a>
+    <div class="card-h">
+      <div class="icon">🔗</div>
+      <h2>Acesso ao formulário</h2>
+    </div>
+    <p style="margin-bottom: 8px;">Use seu e-mail corporativo Logcomex (<code style="background:var(--lx-bg-sunken);padding:1px 5px;border-radius:3px;">@logcomex.com</code>) para fazer login. Em caso de problema, fale com <strong>Kamilla</strong> ou <strong>Thaiane</strong> (CP).</p>
+    <a href="https://formulario-pagamentos.pages.dev/" target="_blank" style="font-weight: 600;">→ formulario-pagamentos.pages.dev</a>
+  </div>
+
+  <!-- KPIs ao vivo -->
+  <h2 style="margin: 26px 0 12px; font-family: &#39;Funnel Display&#39;; font-size:18px;">Resumo dos testes</h2>
+  <div class="kpis">
+    <div class="kpi">
+      <div class="label">Total registros</div>
+      <div class="value" id="kpi-total">0</div>
+      <div class="pct" id="kpi-total-sub">aguardando</div>
+    </div>
+    <div class="kpi ok">
+      <div class="label">✅ OK</div>
+      <div class="value" id="kpi-ok">0</div>
+      <div class="pct" id="kpi-ok-pct">—</div>
+    </div>
+    <div class="kpi parcial">
+      <div class="label">⚠️ Parcial</div>
+      <div class="value" id="kpi-parcial">0</div>
+      <div class="pct" id="kpi-parcial-pct">—</div>
+    </div>
+    <div class="kpi erro">
+      <div class="label">❌ Erro</div>
+      <div class="value" id="kpi-erro">0</div>
+      <div class="pct" id="kpi-erro-pct">—</div>
+    </div>
+    <div class="kpi taxa">
+      <div class="label">📈 Taxa sucesso</div>
+      <div class="value" id="kpi-taxa">—</div>
+      <div class="pct" id="kpi-taxa-sub">OK / total</div>
     </div>
   </div>
 
-  <!-- Registro de Testes -->
+  <!-- Painel analítico -->
+  <div class="painel">
+    <div class="card">
+      <div class="card-h">
+        <div class="icon">🎯</div>
+        <h2>Maiores ofensores</h2>
+      </div>
+      <p style="font-size: 12px; color: var(--lx-neutral-600); margin-bottom: 12px;">Top cenários por número de registros com erro/parcial.</p>
+      <div class="chart-bars" id="ofensores"><div class="empty">Sem dados ainda. Comece registrando testes acima.</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">
+        <div class="icon">🏷️</div>
+        <h2>Categorias de erro</h2>
+      </div>
+      <p style="font-size: 12px; color: var(--lx-neutral-600); margin-bottom: 12px;">Onde os problemas acontecem mais.</p>
+      <div class="cats" id="categorias"><div class="empty">Categorias aparecem aqui conforme você registra erros.</div></div>
+    </div>
+  </div>
+
+  <!-- Severidade + Tempo -->
+  <div class="painel">
+    <div class="card">
+      <div class="card-h">
+        <div class="icon">🚨</div>
+        <h2>Severidade dos erros</h2>
+      </div>
+      <div id="severidade-list"><div class="empty">Severidades aparecem aqui conforme você registra erros.</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">
+        <div class="icon">📅</div>
+        <h2>Atividade por dia</h2>
+      </div>
+      <div class="chart-bars" id="atividade-dia"><div class="empty">Atividade aparece aqui conforme registros chegam.</div></div>
+    </div>
+  </div>
+
+  <!-- Registro -->
   <div class="card">
-    <div class="card-title"><div class="icon">📋</div>Registro de Testes — Caso a Caso</div>
-    <p style="margin-bottom:14px">Para cada solicitação que você enviar pelo formulário, registre aqui o resultado. O time CP acompanha em tempo real.</p>
-
-    <!-- resumo / dashboard -->
-    <div class="stats-bar">
-      <div class="stat-card stat-total"><div class="stat-num" id="statTotal">0</div><div class="stat-lbl">Total</div></div>
-      <div class="stat-card stat-ok"><div class="stat-num" id="statOk">0</div><div class="stat-lbl">✅ OK</div></div>
-      <div class="stat-card stat-parcial"><div class="stat-num" id="statParcial">0</div><div class="stat-lbl">⚠️ Parcial</div></div>
-      <div class="stat-card stat-erro"><div class="stat-num" id="statErro">0</div><div class="stat-lbl">❌ Erro</div></div>
+    <div class="card-h">
+      <div class="icon">📝</div>
+      <h2>Registro de teste</h2>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(event, &#39;tab-unit&#39;)">📝 Registro unitário</button>
+      <button class="tab-btn" onclick="switchTab(event, &#39;tab-lote&#39;)">📦 Registrar em lote</button>
     </div>
 
-    <!-- tabs -->
-    <div class="reg-tabs">
-      <button class="reg-tab active" onclick="switchTab('unitario',this)">📝 Registro unitário</button>
-      <button class="reg-tab" onclick="switchTab('lote',this)">📦 Registrar em lote</button>
-    </div>
+    <div class="tab-content active" id="tab-unit">
+      <div class="form-grid cols-3">
+        <div class="form-group">
+          <label>Data do teste</label>
+          <input type="date" id="r-data" class="input">
+        </div>
+        <div class="form-group">
+          <label>Hora <span class="hint">(opcional)</span></label>
+          <input type="time" id="r-hora" class="input">
+        </div>
+        <div class="form-group">
+          <label>Quem testou <span class="hint">(opcional)</span></label>
+          <input type="text" id="r-testador" class="input" placeholder="Seu nome ou apelido">
+        </div>
+      </div>
 
-    <!-- modo unitário -->
-    <div id="modoUnitario" class="reg-form">
-      <div class="reg-row3">
-        <div class="reg-field">
-          <label>Data</label>
-          <input type="date" id="reg_data">
+      <div class="form-group" style="margin-top: 8px;">
+        <label>Cenário testado *</label>
+        <select id="r-cenario" class="input"><option value="">Selecione o cenário...</option><option value="1 — Login com e-mail corporativo">1 — Login com e-mail corporativo</option><option value="2 — Login com e-mail não cadastrado">2 — Login com e-mail não cadastrado</option><option value="3 — Logout">3 — Logout</option><option value="4 — Upload NF nacional (boleto)">4 — Upload NF nacional (boleto)</option><option value="5 — Upload invoice internacional">5 — Upload invoice internacional</option><option value="6 — NF com imposto / retenção (IRRF, ISS, etc)">6 — NF com imposto / retenção (IRRF, ISS, etc)</option><option value="7 — NF com retenção em formato tabular (NFS-e SP)">7 — NF com retenção em formato tabular (NFS-e SP)</option><option value="8 — NF duplicada (já existe no Pipefy)">8 — NF duplicada (já existe no Pipefy)</option><option value="9 — Trocar NF após preenchimento">9 — Trocar NF após preenchimento</option><option value="10 — NF emitida para empresa errada">10 — NF emitida para empresa errada</option><option value="11 — NF ilegível / OCR falhou">11 — NF ilegível / OCR falhou</option><option value="12 — Múltiplos boletos (parcelamento)">12 — Múltiplos boletos (parcelamento)</option><option value="13 — Fornecedor existente na base">13 — Fornecedor existente na base</option><option value="14 — Fornecedor novo (cadastro)">14 — Fornecedor novo (cadastro)</option><option value="15 — Frequência Parcelado">15 — Frequência Parcelado</option><option value="16 — Pagamento Boleto">16 — Pagamento Boleto</option><option value="17 — Pagamento TED — banco destinatário">17 — Pagamento TED — banco destinatário</option><option value="18 — Pagamento PIX">18 — Pagamento PIX</option><option value="19 — Reembolso simples (1 comprovante)">19 — Reembolso simples (1 comprovante)</option><option value="20 — Reembolso múltiplo (vários itens)">20 — Reembolso múltiplo (vários itens)</option><option value="21 — Reembolso bloqueado por política (Airbnb, passagem, etc)">21 — Reembolso bloqueado por política (Airbnb, passagem, etc)</option><option value="22 — Auto-preenchimento por CPF (banco/agência/conta)">22 — Auto-preenchimento por CPF (banco/agência/conta)</option><option value="23 — Data da despesa (validação)">23 — Data da despesa (validação)</option><option value="24 — Fluxo Pagamento Internacional">24 — Fluxo Pagamento Internacional</option><option value="25 — Cadastro fornecedor offshore">25 — Cadastro fornecedor offshore</option><option value="26 — DP Folha de pagamento">26 — DP Folha de pagamento</option><option value="27 — DP Impostos / FGTS / ISS">27 — DP Impostos / FGTS / ISS</option><option value="28 — DP Swile (rateio)">28 — DP Swile (rateio)</option><option value="29 — Tela de resumo antes do envio">29 — Tela de resumo antes do envio</option><option value="30 — Envio completo de solicitação">30 — Envio completo de solicitação</option><option value="31 — Card duplicado (campos no Pipefy)">31 — Card duplicado (campos no Pipefy)</option><option value="32 — Solicitar ajuste após envio">32 — Solicitar ajuste após envio</option><option value="33 — Cancelar solicitação">33 — Cancelar solicitação</option><option value="34 — Minhas solicitações (listagem)">34 — Minhas solicitações (listagem)</option><option value="35 — Valores corretos no dashboard">35 — Valores corretos no dashboard</option><option value="36 — Filtros do dashboard">36 — Filtros do dashboard</option><option value="37 — Abrir detalhe de uma solicitação">37 — Abrir detalhe de uma solicitação</option><option value="38 — Botão " abrir="" no="" pipefy"="" (não="" deve="" aparecer)"="">38 — Botão "Abrir no Pipefy" (não deve aparecer)</option><option value="39 — Notificação Slack (envio)">39 — Notificação Slack (envio)</option><option value="40 — Notificação Slack (mudança de fase)">40 — Notificação Slack (mudança de fase)</option><option value="41 — Políticas em PDF (botão fixo)">41 — Políticas em PDF (botão fixo)</option><option value="42 — Performance / Tempo de resposta">42 — Performance / Tempo de resposta</option><option value="43 — Erro inesperado / Travamento">43 — Erro inesperado / Travamento</option><option value="44 — Outro (especifique na descrição)">44 — Outro (especifique na descrição)</option></select>
+      </div>
+
+      <div class="form-group" style="margin-top: 8px;">
+        <label>Status *</label>
+        <div class="status-pills" id="r-status-pills">
+          <button type="button" class="pill" data-val="OK">✅ OK — funcionou como esperado</button>
+          <button type="button" class="pill" data-val="Parcial">⚠️ Parcial — funcionou em partes</button>
+          <button type="button" class="pill" data-val="Erro">❌ Erro — não funcionou ou bloqueou</button>
         </div>
-        <div class="reg-field">
-          <label>Cenário testado</label>
-          <select id="reg_cenario">
-            <option value="">Selecione...</option>
-            <option>1 — Login com e-mail corporativo</option>
-            <option>2 — Login com e-mail não cadastrado</option>
-            <option>3 — Upload NF nacional (boleto)</option>
-            <option>4 — Upload invoice internacional</option>
-            <option>5 — NF com imposto / retenção</option>
-            <option>6 — NF duplicada</option>
-            <option>7 — Trocar NF após preenchimento</option>
-            <option>8 — Fornecedor existente na base</option>
-            <option>9 — Fornecedor novo</option>
-            <option>10 — NF emitida para empresa errada</option>
-            <option>11 — Frequência Parcelado</option>
-            <option>12 — Pagamento TED — campo banco</option>
-            <option>13 — Campo descrição automático</option>
-            <option>14 — Data da despesa — reembolso</option>
-            <option>15 — Fluxo internacional</option>
-            <option>16 — Envio completo de solicitação</option>
-            <option>17 — Tela de resumo antes do envio</option>
-            <option>18 — Solicitar ajuste após envio</option>
-            <option>19 — Minhas solicitações</option>
-            <option>20 — Notificação Slack</option>
-          </select>
-        </div>
-        <div class="reg-field">
-          <label>Status</label>
-          <div class="status-btns" id="statusBtns">
-            <button class="status-btn s-ok" onclick="setStatus('ok',this)">✅ OK</button>
-            <button class="status-btn s-parcial" onclick="setStatus('parcial',this)">⚠️ Parcial</button>
-            <button class="status-btn s-erro" onclick="setStatus('erro',this)">❌ Erro</button>
+      </div>
+
+      <!-- Aparece se status != OK -->
+      <div class="conditional block" id="cond-erro">
+        <div class="form-grid cols-3" style="margin-top: 8px;">
+          <div class="form-group">
+            <label>Categoria do erro *</label>
+            <select id="r-categoria" class="input">
+              <option value="">Selecione...</option>
+              <option value="OCR / IA">📄 OCR / IA (NF, extração de campos)</option>
+              <option value="Validação / Form">📋 Validação / Formulário (campo obrigatório, regra de negócio)</option>
+              <option value="Anexo / Upload">📎 Anexo / Upload (não sobe, não lê)</option>
+              <option value="Pipefy / Backend">🔧 Pipefy / Backend (rejeitou submit, campo errado)</option>
+              <option value="Banco / Cadastro">🏦 Banco / Dados bancários</option>
+              <option value="Política / Reembolso">📜 Política / Validação Reembolso</option>
+              <option value="Slack / Notificação">💬 Slack / Notificação</option>
+              <option value="Dashboard / Listagem">📊 Dashboard / Listagem cards</option>
+              <option value="UI / Layout">🎨 UI / Layout / Visual</option>
+              <option value="Performance / Lento">⏱️ Performance / Lentidão</option>
+              <option value="Outro">📝 Outro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Severidade *</label>
+            <div class="status-pills" id="r-severidade-pills">
+              <button type="button" class="pill" data-val="Bloqueante">🚫 Bloqueante</button>
+              <button type="button" class="pill" data-val="Contornável">⚠️ Contornável</button>
+              <button type="button" class="pill" data-val="Cosmético">💄 Cosmético</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Conseguiu prosseguir? *</label>
+            <select id="r-prosseguiu" class="input">
+              <option value="">Selecione...</option>
+              <option value="Sim">✅ Sim, contornei</option>
+              <option value="Não">❌ Não, fiquei travada</option>
+              <option value="Parcial">⚠️ Em parte</option>
+            </select>
           </div>
         </div>
       </div>
-      <div class="reg-row2">
-        <div class="reg-field">
-          <label>Fornecedor / Descrição <span style="font-weight:400;opacity:.6">(opcional)</span></label>
-          <input type="text" id="reg_fornecedor" placeholder="Ex: SERPRO, Reembolso João...">
+
+      <div class="form-grid" style="margin-top: 8px;">
+        <div class="form-group">
+          <label>Fornecedor / Descrição da solicitação <span class="hint">(opcional)</span></label>
+          <input type="text" id="r-fornecedor" class="input" placeholder="Ex: ACME LTDA / Aluguel coletor">
         </div>
-        <div class="reg-field">
-          <label>Valor <span style="font-weight:400;opacity:.6">(opcional)</span></label>
-          <input type="text" id="reg_valor" placeholder="Ex: R$ 1.200,00">
+        <div class="form-group">
+          <label>Valor R$ <span class="hint">(opcional)</span></label>
+          <input type="text" id="r-valor" class="input" placeholder="Ex: 8.571,43">
         </div>
       </div>
-      <div class="reg-field">
-        <label>O que aconteceu</label>
-        <textarea id="reg_obs" rows="2" placeholder="Ex: IA preencheu fornecedor errado. / Card não apareceu no Pipefy. / Tudo certo, subiu normalmente."></textarea>
+
+      <div class="form-grid" style="margin-top: 8px;">
+        <div class="form-group">
+          <label>Card # criado no Pipefy <span class="hint">(opcional)</span></label>
+          <input type="text" id="r-cardid" class="input" placeholder="Ex: 1394768053">
+        </div>
+        <div class="form-group">
+          <label>Tempo gasto preenchendo <span class="hint">(opcional)</span></label>
+          <select id="r-tempo" class="input">
+            <option value="">Não medi</option>
+            <option value="&lt; 2 min">Menos de 2 min</option>
+            <option value="2-5 min">2 a 5 min</option>
+            <option value="5-10 min">5 a 10 min</option>
+            <option value="10-20 min">10 a 20 min</option>
+            <option value="&gt; 20 min">Mais de 20 min</option>
+          </select>
+        </div>
       </div>
-      <div style="display:flex;justify-content:flex-end;margin-top:12px">
-        <button class="btn-reg-add" onclick="addUnitario()">+ Adicionar registro</button>
+
+      <div class="form-group" style="margin-top: 8px;">
+        <label>O que aconteceu *</label>
+        <textarea id="r-desc" placeholder="Descreva o que você fez, o que esperava e o que aconteceu de verdade. Quanto mais detalhe, mais fácil de corrigir."></textarea>
       </div>
+
+      <div class="conditional block" id="cond-reproducao">
+        <div class="form-group" style="margin-top: 8px;">
+          <label>Passos para reproduzir <span class="hint">(se erro — opcional mas muito útil)</span></label>
+          <textarea id="r-repro" placeholder="1. Entrei em CAP
+2. Anexei a NF
+3. Cliquei em enviar
+4. Apareceu erro X"></textarea>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Link do print de erro <span class="hint">(opcional)</span></label>
+            <input type="text" id="r-print" class="input" placeholder="Cole link Drive/Slack ou descreva o erro">
+          </div>
+          <div class="form-group">
+            <label>Mensagem de erro exata <span class="hint">(se houve)</span></label>
+            <input type="text" id="r-msg-erro" class="input" placeholder="Ex: Field &quot;anexar_boleto&quot; is required">
+          </div>
+        </div>
+      </div>
+
+      <div class="fingerprint" id="fingerprint">📡 Será capturado ao salvar: Chrome · Windows · Desktop</div>
+
+      <div class="btn-row">
+        <button class="btn primary" onclick="salvarUnit()">+ Adicionar registro</button>
+        <button class="btn ghost" onclick="limparForm()">Limpar</button>
+      </div>
+      <div class="alert" id="alert-salvo">✓ Registro salvo. Obrigada!</div>
     </div>
 
-    <!-- modo lote -->
-    <div id="modoLote" class="reg-form" style="display:none">
-      <p class="lote-hint">Preencha várias linhas de uma vez e clique em <strong>Salvar lote</strong>. Útil para registrar vários testes feitos no mesmo dia.</p>
-      <div class="lote-head">
-        <span>Data</span><span>Cenário</span><span>Fornecedor</span><span>O que aconteceu</span><span>Status</span><span></span>
+    <div class="tab-content" id="tab-lote">
+      <p style="font-size: 13px; color: var(--lx-neutral-600); margin-bottom: 10px;">
+        Preencha várias linhas de uma vez e clique em <strong>Salvar lote</strong>. Útil para registrar testes feitos no mesmo dia.
+      </p>
+      <div id="lote-rows"><div class="lote-row" style="font-weight:600; font-size:11px; color:var(--lx-neutral-600); text-transform: uppercase; letter-spacing: 0.05em;"><div>Data</div><div>Cenário</div><div>Fornecedor</div><div>O que aconteceu</div><div>Status</div><div></div></div><div class="lote-row" data-idx="0">
+    <input type="date" class="input" value="2026-06-24">
+    <select class="input"><option value="">Selecione...</option><option>1 — Login com e-mail corporativo</option><option>2 — Login com e-mail não cadastrado</option><option>3 — Logout</option><option>4 — Upload NF nacional (boleto)</option><option>5 — Upload invoice internacional</option><option>6 — NF com imposto / retenção (IRRF, ISS, etc)</option><option>7 — NF com retenção em formato tabular (NFS-e SP)</option><option>8 — NF duplicada (já existe no Pipefy)</option><option>9 — Trocar NF após preenchimento</option><option>10 — NF emitida para empresa errada</option><option>11 — NF ilegível / OCR falhou</option><option>12 — Múltiplos boletos (parcelamento)</option><option>13 — Fornecedor existente na base</option><option>14 — Fornecedor novo (cadastro)</option><option>15 — Frequência Parcelado</option><option>16 — Pagamento Boleto</option><option>17 — Pagamento TED — banco destinatário</option><option>18 — Pagamento PIX</option><option>19 — Reembolso simples (1 comprovante)</option><option>20 — Reembolso múltiplo (vários itens)</option><option>21 — Reembolso bloqueado por política (Airbnb, passagem, etc)</option><option>22 — Auto-preenchimento por CPF (banco/agência/conta)</option><option>23 — Data da despesa (validação)</option><option>24 — Fluxo Pagamento Internacional</option><option>25 — Cadastro fornecedor offshore</option><option>26 — DP Folha de pagamento</option><option>27 — DP Impostos / FGTS / ISS</option><option>28 — DP Swile (rateio)</option><option>29 — Tela de resumo antes do envio</option><option>30 — Envio completo de solicitação</option><option>31 — Card duplicado (campos no Pipefy)</option><option>32 — Solicitar ajuste após envio</option><option>33 — Cancelar solicitação</option><option>34 — Minhas solicitações (listagem)</option><option>35 — Valores corretos no dashboard</option><option>36 — Filtros do dashboard</option><option>37 — Abrir detalhe de uma solicitação</option><option>38 — Botão "Abrir no Pipefy" (não deve aparecer)</option><option>39 — Notificação Slack (envio)</option><option>40 — Notificação Slack (mudança de fase)</option><option>41 — Políticas em PDF (botão fixo)</option><option>42 — Performance / Tempo de resposta</option><option>43 — Erro inesperado / Travamento</option><option>44 — Outro (especifique na descrição)</option></select>
+    <input type="text" class="input" placeholder="Fornecedor / valor / desc">
+    <input type="text" class="input" placeholder="O que aconteceu">
+    <select class="input"><option value="OK">✅ OK</option><option value="Parcial">⚠️ Parcial</option><option value="Erro">❌ Erro</option></select>
+    <button type="button" onclick="this.parentElement.remove()">×</button>
+  </div></div>
+      <button class="btn ghost" onclick="addLoteRow()" style="margin-top: 4px;">+ Nova linha</button>
+      <div class="btn-row">
+        <button class="btn primary" onclick="salvarLote()">💾 Salvar lote</button>
+        <button class="btn ghost" onclick="limparLote()">Limpar lote</button>
       </div>
-      <div id="loteRows"></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
-        <button class="btn-add-lote-row" onclick="addLoteRow()">+ Nova linha</button>
-        <button class="btn-reg-add" onclick="salvarLote()">💾 Salvar lote</button>
-      </div>
+      <div class="alert" id="alert-lote">✓ Lote salvo.</div>
     </div>
-
-    <!-- tabela de registros -->
-    <div class="reg-table-wrap" id="regTableWrap" style="display:none">
-      <div class="reg-table-head">
-        <div class="reg-table-title">Registros salvos</div>
-        <div class="reg-count" id="regCount"></div>
-      </div>
-      <div class="reg-scroll">
-        <table class="reg-table">
-          <thead><tr>
-            <th>Data</th><th>Cenário</th><th>Fornecedor</th><th>Valor</th><th>Status</th><th>O que aconteceu</th><th></th>
-          </tr></thead>
-          <tbody id="regTbody"></tbody>
-        </table>
-      </div>
-    </div>
-    <div class="empty-msg" id="regEmpty">Nenhum registro ainda. Adicione o primeiro acima! 👆</div>
   </div>
 
-  <!-- Feedback Geral -->
+  <!-- Tabela de registros -->
   <div class="card">
-    <div class="card-title"><div class="icon">💬</div>Feedback Geral</div>
-    <p style="margin-bottom:20px">Compartilhe sua experiência geral com o novo formulário. Não precisa esperar o final das 2 semanas — pode ir preenchendo conforme usar.</p>
-
-    <!-- Nota geral -->
-    <div class="fb-section">
-      <div class="fb-section-title">⭐ Qual nota você dá para o novo formulário?</div>
-      <div class="nps-row" id="npsRow">
-        <button class="nps-btn" onclick="setNPS(0,this)">0</button>
-        <button class="nps-btn" onclick="setNPS(1,this)">1</button>
-        <button class="nps-btn" onclick="setNPS(2,this)">2</button>
-        <button class="nps-btn" onclick="setNPS(3,this)">3</button>
-        <button class="nps-btn" onclick="setNPS(4,this)">4</button>
-        <button class="nps-btn" onclick="setNPS(5,this)">5</button>
-        <button class="nps-btn" onclick="setNPS(6,this)">6</button>
-        <button class="nps-btn" onclick="setNPS(7,this)">7</button>
-        <button class="nps-btn" onclick="setNPS(8,this)">8</button>
-        <button class="nps-btn" onclick="setNPS(9,this)">9</button>
-        <button class="nps-btn" onclick="setNPS(10,this)">10</button>
+    <div class="card-h" style="justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="icon">📚</div>
+        <h2>Registros salvos</h2>
       </div>
-      <div class="nps-labels"><span>😤 Péssimo</span><span>🤩 Excelente</span></div>
-    </div>
-
-    <!-- Comparação -->
-    <div class="fb-section">
-      <div class="fb-section-title">⚖️ Comparado ao processo anterior, este formulário é...</div>
-      <div class="select-cards" id="comparacao" style="grid-template-columns:repeat(3,1fr)">
-        <div class="select-card" onclick="selCard(this,'comparacao','muito_melhor')"><span class="sc-emoji">🚀</span><div><div class="sc-label">Muito melhor</div></div></div>
-        <div class="select-card" onclick="selCard(this,'comparacao','melhor')"><span class="sc-emoji">👍</span><div><div class="sc-label">Um pouco melhor</div></div></div>
-        <div class="select-card" onclick="selCard(this,'comparacao','igual')"><span class="sc-emoji">😐</span><div><div class="sc-label">Igual</div></div></div>
-        <div class="select-card" onclick="selCard(this,'comparacao','pior')"><span class="sc-emoji">👎</span><div><div class="sc-label">Um pouco pior</div></div></div>
-        <div class="select-card" onclick="selCard(this,'comparacao','muito_pior')"><span class="sc-emoji">💀</span><div><div class="sc-label">Muito pior</div></div></div>
-        <div class="select-card" onclick="selCard(this,'comparacao','sem_base')"><span class="sc-emoji">🤷</span><div><div class="sc-label">Sem base de comparação</div></div></div>
+      <div style="display: flex; gap: 6px;">
+        <button class="btn ghost" onclick="exportarJSON()">⬇️ JSON</button>
+        <button class="btn ghost" onclick="exportarCSV()">⬇️ CSV</button>
+        <button class="btn ghost" onclick="apagarTodos()" style="color: var(--lx-red);">🗑️ Apagar todos</button>
       </div>
     </div>
 
-    <!-- Tempo -->
-    <div class="fb-section">
-      <div class="fb-section-title">⏱️ Quanto tempo você leva para preencher uma solicitação?</div>
-      <div class="fb-grid2">
-        <div class="reg-field">
-          <label>No processo anterior</label>
-          <select id="fb_tempo_antes" onchange="autoSaveFb()">
-            <option value="">Selecione...</option>
-            <option>Menos de 5 min</option><option>5 a 10 min</option><option>10 a 20 min</option>
-            <option>20 a 30 min</option><option>Mais de 30 min</option>
-          </select>
-        </div>
-        <div class="reg-field">
-          <label>No novo formulário</label>
-          <select id="fb_tempo_novo" onchange="autoSaveFb()">
-            <option value="">Selecione...</option>
-            <option>Menos de 5 min</option><option>5 a 10 min</option><option>10 a 20 min</option>
-            <option>20 a 30 min</option><option>Mais de 30 min</option>
-          </select>
-        </div>
+    <div class="filters">
+      <div class="filter-group">
+        <label>Buscar</label>
+        <input type="text" id="f-busca" class="input" placeholder="cenário, fornecedor, texto..." oninput="renderTabela()">
+      </div>
+      <div class="filter-group">
+        <label>Status</label>
+        <select id="f-status" class="input" onchange="renderTabela()">
+          <option value="">Todos</option>
+          <option value="OK">✅ OK</option>
+          <option value="Parcial">⚠️ Parcial</option>
+          <option value="Erro">❌ Erro</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Categoria</label>
+        <select id="f-categoria" class="input" onchange="renderTabela()"><option value="">Todas</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Severidade</label>
+        <select id="f-severidade" class="input" onchange="renderTabela()">
+          <option value="">Todas</option>
+          <option value="Bloqueante">🚫 Bloqueante</option>
+          <option value="Contornável">⚠️ Contornável</option>
+          <option value="Cosmético">💄 Cosmético</option>
+        </select>
       </div>
     </div>
 
-    <!-- Textos livres -->
-    <div class="fb-grid2" style="margin-bottom:16px">
-      <div class="fb-section">
-        <div class="fb-section-title">🌟 O que funcionou muito bem?</div>
-        <textarea class="fb-textarea" id="fb_positivo" placeholder="O que te surpreendeu positivamente, o que foi fácil, o que agilizou..." oninput="autoSaveFb()"></textarea>
-      </div>
-      <div class="fb-section">
-        <div class="fb-section-title">😤 O que não funcionou ou te frustrou?</div>
-        <textarea class="fb-textarea" id="fb_negativo" placeholder="O que travou, confundiu, ou precisou de uma volta para funcionar..." oninput="autoSaveFb()"></textarea>
-      </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Cenário</th>
+            <th>Fornecedor</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th>Severidade</th>
+            <th>Categoria</th>
+            <th>O que aconteceu</th>
+            <th>Card</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbl-body"></tbody>
+      </table>
     </div>
-
-    <div class="fb-section" style="margin-bottom:16px">
-      <div class="fb-section-title">💡 Sugestões de melhoria</div>
-      <textarea class="fb-textarea" id="fb_sugestoes" placeholder="O que você mudaria, adicionaria ou removeria do formulário..." oninput="autoSaveFb()" style="min-height:70px"></textarea>
-    </div>
-
-    <div class="fb-section" style="margin-bottom:20px">
-      <div class="fb-section-title">💬 Alguma coisa que não coube nas perguntas acima?</div>
-      <textarea class="fb-textarea" id="fb_livre" placeholder="Fique à vontade para comentar qualquer outra coisa..." oninput="autoSaveFb()" style="min-height:70px"></textarea>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:16px">
-      <button class="btn-fb-submit" onclick="salvarFeedback()">Salvar feedback ✓</button>
-      <div class="fb-saved" id="fbSaved">✅ Feedback salvo!</div>
-    </div>
+    <div id="empty-state" class="empty" style="display: block;">Nenhum registro ainda. Adicione o primeiro acima! 👆</div>
   </div>
 
-  <div class="footer">Dúvidas? Fale com <span>Kamilla ou Thaiane</span> — Contas a Pagar Logcomex</div>
+  <!-- Feedback geral -->
+  <div class="card">
+    <div class="card-h">
+      <div class="icon">💬</div>
+      <h2>Feedback Geral</h2>
+    </div>
+    <p style="font-size: 13px; color: var(--lx-neutral-600); margin-bottom: 16px;">
+      Compartilhe sua experiência geral com o novo formulário. Não precisa esperar o final das 2 semanas — pode preencher conforme usar.
+    </p>
+
+    <div class="form-group">
+      <label>⭐ Que nota você dá ao novo formulário? (0-10)</label>
+      <div class="nota-slider" id="nota-slider"><button type="button" class="nota-btn" data-val="0">0</button><button type="button" class="nota-btn" data-val="1">1</button><button type="button" class="nota-btn" data-val="2">2</button><button type="button" class="nota-btn" data-val="3">3</button><button type="button" class="nota-btn" data-val="4">4</button><button type="button" class="nota-btn" data-val="5">5</button><button type="button" class="nota-btn" data-val="6">6</button><button type="button" class="nota-btn" data-val="7">7</button><button type="button" class="nota-btn" data-val="8">8</button><button type="button" class="nota-btn" data-val="9">9</button><button type="button" class="nota-btn" data-val="10">10</button></div>
+    </div>
+
+    <div class="form-group" style="margin-top: 16px;">
+      <label>⚖️ Comparado ao processo anterior, este é...</label>
+      <div class="comp-grid" id="comp-grid">
+        <button class="comp-btn" data-val="muito_melhor"><span class="emoji">🚀</span>Muito melhor</button>
+        <button class="comp-btn" data-val="um_pouco_melhor"><span class="emoji">👍</span>Um pouco melhor</button>
+        <button class="comp-btn" data-val="igual"><span class="emoji">😐</span>Igual</button>
+        <button class="comp-btn" data-val="um_pouco_pior"><span class="emoji">👎</span>Um pouco pior</button>
+        <button class="comp-btn" data-val="muito_pior"><span class="emoji">💀</span>Muito pior</button>
+        <button class="comp-btn" data-val="sem_base"><span class="emoji">🤷</span>Sem base</button>
+      </div>
+    </div>
+
+    <div class="form-grid" style="margin-top: 16px;">
+      <div class="form-group">
+        <label>⏱️ Tempo no processo anterior</label>
+        <select id="fb-tempo-old" class="input">
+          <option value="">Selecione...</option>
+          <option>Menos de 5 min</option>
+          <option>5 a 10 min</option>
+          <option>10 a 20 min</option>
+          <option>20 a 30 min</option>
+          <option>Mais de 30 min</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>⏱️ Tempo no novo formulário</label>
+        <select id="fb-tempo-new" class="input">
+          <option value="">Selecione...</option>
+          <option>Menos de 5 min</option>
+          <option>5 a 10 min</option>
+          <option>10 a 20 min</option>
+          <option>20 a 30 min</option>
+          <option>Mais de 30 min</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group" style="margin-top: 12px;">
+      <label>🌟 O que funcionou muito bem?</label>
+      <textarea id="fb-bom"></textarea>
+    </div>
+
+    <div class="form-group" style="margin-top: 12px;">
+      <label>😤 O que não funcionou ou te frustrou?</label>
+      <textarea id="fb-ruim"></textarea>
+    </div>
+
+    <div class="form-group" style="margin-top: 12px;">
+      <label>💡 Sugestões de melhoria</label>
+      <textarea id="fb-sugest"></textarea>
+    </div>
+
+    <div class="form-group" style="margin-top: 12px;">
+      <label>💬 Alguma coisa que não coube nas perguntas acima?</label>
+      <textarea id="fb-livre"></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn primary" onclick="salvarFeedback()">Salvar feedback ✓</button>
+    </div>
+    <div class="alert" id="alert-fb">✓ Feedback salvo!</div>
+  </div>
+
+  <div class="footer">
+    Dúvidas? Fale com <strong>Kamilla</strong> ou <strong>Thaiane</strong> — Contas a Pagar Logcomex<br>
+    <span style="font-size: 11px; opacity: 0.6;">Dados ficam no seu navegador (localStorage). Use o botão "⬇️ JSON" para fazer backup.</span>
+  </div>
+
 </div>
 
-<div class="toast" id="toast"></div>
-
 <script>
-const SUPA = 'https://moikuofjjyvleorbfhay.supabase.co';
-const KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vaWt1b2Zqanl2bGVvcmJmaGF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2ODYyOTgsImV4cCI6MjA5NzI2MjI5OH0.IL-sCw1Pi-QNSPfTVeeI6WEjbnUoGKVCJ6lYdm0aD6o';
-const H    = {'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=representation'};
-const TREG = 'registro_testes';
-const TFB  = 'feedback_geral_testes';
+/* ============== CENÁRIOS DE TESTE ============== */
+const CENARIOS = [
+  /* Autenticação */
+  '1 — Login com e-mail corporativo',
+  '2 — Login com e-mail não cadastrado',
+  '3 — Logout',
+  /* Upload e OCR */
+  '4 — Upload NF nacional (boleto)',
+  '5 — Upload invoice internacional',
+  '6 — NF com imposto / retenção (IRRF, ISS, etc)',
+  '7 — NF com retenção em formato tabular (NFS-e SP)',
+  '8 — NF duplicada (já existe no Pipefy)',
+  '9 — Trocar NF após preenchimento',
+  '10 — NF emitida para empresa errada',
+  '11 — NF ilegível / OCR falhou',
+  '12 — Múltiplos boletos (parcelamento)',
+  /* Fornecedor */
+  '13 — Fornecedor existente na base',
+  '14 — Fornecedor novo (cadastro)',
+  /* Pagamento */
+  '15 — Frequência Parcelado',
+  '16 — Pagamento Boleto',
+  '17 — Pagamento TED — banco destinatário',
+  '18 — Pagamento PIX',
+  /* Reembolso */
+  '19 — Reembolso simples (1 comprovante)',
+  '20 — Reembolso múltiplo (vários itens)',
+  '21 — Reembolso bloqueado por política (Airbnb, passagem, etc)',
+  '22 — Auto-preenchimento por CPF (banco/agência/conta)',
+  '23 — Data da despesa (validação)',
+  /* Internacional */
+  '24 — Fluxo Pagamento Internacional',
+  '25 — Cadastro fornecedor offshore',
+  /* DP */
+  '26 — DP Folha de pagamento',
+  '27 — DP Impostos / FGTS / ISS',
+  '28 — DP Swile (rateio)',
+  /* Pós-envio */
+  '29 — Tela de resumo antes do envio',
+  '30 — Envio completo de solicitação',
+  '31 — Card duplicado (campos no Pipefy)',
+  '32 — Solicitar ajuste após envio',
+  '33 — Cancelar solicitação',
+  /* Dashboard */
+  '34 — Minhas solicitações (listagem)',
+  '35 — Valores corretos no dashboard',
+  '36 — Filtros do dashboard',
+  '37 — Abrir detalhe de uma solicitação',
+  '38 — Botão "Abrir no Pipefy" (não deve aparecer)',
+  /* Notificação */
+  '39 — Notificação Slack (envio)',
+  '40 — Notificação Slack (mudança de fase)',
+  /* Outros */
+  '41 — Políticas em PDF (botão fixo)',
+  '42 — Performance / Tempo de resposta',
+  '43 — Erro inesperado / Travamento',
+  '44 — Outro (especifique na descrição)'
+];
 
-let statusSel = '';
-let fbId = null;
-let fbSels = {};
-let fbTimer = null;
+/* ============== STATE ============== */
+const STORAGE_KEY = 'logcomex_guia_testes_v2';
+const STORAGE_KEY_LEGACY = 'logcomex_guia_testes';  /* compatibilidade com versão antiga */
+const FEEDBACK_KEY = 'logcomex_guia_feedback';
 
-// ── TABS ──
-function switchTab(mode, btn){
-  document.querySelectorAll('.reg-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('modoUnitario').style.display = mode==='unitario'?'block':'none';
-  document.getElementById('modoLote').style.display     = mode==='lote'?'block':'none';
-  if(mode==='lote' && !document.getElementById('loteRows').children.length) addLoteRow();
+let state = {
+  registros: [],
+  loteRows: [],
+  status: null,
+  severidade: null,
+  feedback: { nota: null, comparacao: null }
+};
+
+/* ============== UTILS ============== */
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
+function hoje() { return new Date().toISOString().slice(0, 10); }
+function fmtData(d) {
+  if (!d) return '—';
+  if (/^\d{4}-\d{2}-\d{2}/.test(d)) {
+    const [y, m, day] = d.slice(0, 10).split('-');
+    return `${day}/${m}/${y}`;
+  }
+  return d;
+}
+function detectarBrowser() {
+  const ua = navigator.userAgent;
+  let browser = 'Desconhecido';
+  if (/Edg\//.test(ua)) browser = 'Edge';
+  else if (/Chrome\/\d/.test(ua) && !/Edg/.test(ua)) browser = 'Chrome';
+  else if (/Firefox/.test(ua)) browser = 'Firefox';
+  else if (/Safari/.test(ua) && !/Chrome/.test(ua)) browser = 'Safari';
+  let os = 'Desconhecido';
+  if (/Windows/.test(ua)) os = 'Windows';
+  else if (/Mac OS/.test(ua)) os = 'macOS';
+  else if (/Android/.test(ua)) os = 'Android';
+  else if (/iPhone|iPad/.test(ua)) os = 'iOS';
+  else if (/Linux/.test(ua)) os = 'Linux';
+  const dispositivo = (/Mobi|Android|iPhone|iPad/.test(ua)) ? 'Mobile' : 'Desktop';
+  return { browser, os, dispositivo, ua };
 }
 
-// ── STATUS ──
-function setStatus(s, btn){
-  document.querySelectorAll('#statusBtns .status-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-  statusSel = s;
+/* ============== LOAD/SAVE ============== */
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      state.registros = JSON.parse(raw) || [];
+    } else {
+      /* Migra do localStorage legado se houver */
+      const legacy = localStorage.getItem(STORAGE_KEY_LEGACY);
+      if (legacy) {
+        try {
+          const arr = JSON.parse(legacy);
+          if (Array.isArray(arr)) {
+            state.registros = arr.map(r => ({
+              id: uid(),
+              data: r.data || hoje(),
+              cenario: r.cenario || '',
+              fornecedor: r.fornecedor || '',
+              valor: r.valor || '',
+              status: r.status || 'OK',
+              descricao: r.descricao || r.desc || '',
+              testador: r.testador || '',
+              categoria: '',
+              severidade: '',
+              prosseguiu: '',
+              cardId: '',
+              tempo: '',
+              reproducao: '',
+              print: '',
+              msgErro: '',
+              browser: '',
+              os: '',
+              dispositivo: '',
+              criadoEm: r.criadoEm || new Date().toISOString()
+            }));
+            save();
+            console.log('[guia-testes] Migrados', state.registros.length, 'registros da versão antiga.');
+          }
+        } catch(e) {}
+      }
+    }
+    const fbRaw = localStorage.getItem(FEEDBACK_KEY);
+    if (fbRaw) state.feedback = JSON.parse(fbRaw) || state.feedback;
+  } catch (e) { console.warn('Falha ao carregar:', e); }
+}
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state.registros));
+}
+function saveFeedback() {
+  localStorage.setItem(FEEDBACK_KEY, JSON.stringify(state.feedback));
 }
 
-// ── TOAST ──
-function toast(msg, err=false){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.className='toast show'+(err?' err':'');
-  setTimeout(()=>t.className='toast',2800);
-}
-
-// ── RENDER ROW ──
-function statusTag(s){
-  if(s==='ok')      return '<span class="tag-ok">✅ OK</span>';
-  if(s==='parcial') return '<span class="tag-parcial">⚠️ Parcial</span>';
-  return '<span class="tag-erro">❌ Erro</span>';
-}
-function fmtDate(d){ return d?d.split('-').reverse().join('/'):'—'; }
-
-function renderRow(r, prepend=false){
-  const tbody = document.getElementById('regTbody');
-  const tr = document.createElement('tr');
-  tr.dataset.id = r.id;
-  tr.dataset.status = r.status||'';
-  tr.innerHTML = `<td style="white-space:nowrap">${fmtDate(r.data_teste)}</td>
-    <td>${r.cenario||'—'}</td>
-    <td>${r.fornecedor||'—'}</td>
-    <td style="white-space:nowrap">${r.valor||'—'}</td>
-    <td>${statusTag(r.status)}</td>
-    <td style="max-width:240px">${r.observacao||'—'}</td>
-    <td><button class="btn-del-reg" onclick="delReg('${r.id}',this)">✕</button></td>`;
-  if(prepend && tbody.firstChild) tbody.insertBefore(tr, tbody.firstChild);
-  else tbody.appendChild(tr);
-  document.getElementById('regTableWrap').style.display='block';
-  document.getElementById('regEmpty').style.display='none';
-  updateCount();
-}
-
-function updateCount(){
-  const n=document.getElementById('regTbody').children.length;
-  document.getElementById('regCount').textContent=n+(n===1?' registro':' registros');
-  updateStats();
-}
-
-function updateStats(){
-  const trs=[...document.querySelectorAll('#regTbody tr')];
-  let ok=0,parcial=0,erro=0;
-  trs.forEach(t=>{
-    const s=t.dataset.status;
-    if(s==='ok')ok++; else if(s==='parcial')parcial++; else if(s==='erro')erro++;
+/* ============== UI: pills (status/severidade) ============== */
+function bindPills(containerId, onSelect) {
+  const c = document.getElementById(containerId);
+  c.querySelectorAll('.pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      c.querySelectorAll('.pill').forEach(b => b.classList.remove('active', 'ok', 'parcial', 'erro', 'sev-blq', 'sev-cnt', 'sev-csm'));
+      btn.classList.add('active');
+      const v = btn.dataset.val;
+      if (v === 'OK') btn.classList.add('ok');
+      else if (v === 'Parcial') btn.classList.add('parcial');
+      else if (v === 'Erro') btn.classList.add('erro');
+      else if (v === 'Bloqueante') btn.classList.add('sev-blq');
+      else if (v === 'Contornável') btn.classList.add('sev-cnt');
+      else if (v === 'Cosmético') btn.classList.add('sev-csm');
+      onSelect(v);
+    });
   });
-  document.getElementById('statTotal').textContent=trs.length;
-  document.getElementById('statOk').textContent=ok;
-  document.getElementById('statParcial').textContent=parcial;
-  document.getElementById('statErro').textContent=erro;
 }
 
-async function delReg(id, btn){
-  if(!confirm('Remover este registro?')) return;
-  await fetch(`${SUPA}/rest/v1/${TREG}?id=eq.${id}`,{method:'DELETE',headers:H});
-  btn.closest('tr').remove();
-  updateCount();
-  if(!document.getElementById('regTbody').children.length){
-    document.getElementById('regTableWrap').style.display='none';
-    document.getElementById('regEmpty').style.display='block';
+/* ============== CENÁRIOS DROPDOWN ============== */
+function popularCenarios() {
+  const sel = document.getElementById('r-cenario');
+  sel.innerHTML = '<option value="">Selecione o cenário...</option>' +
+    CENARIOS.map(c => `<option value="${c}">${c}</option>`).join('');
+  /* Filtro de categorias dinâmico */
+  /* Populado no renderTabela */
+}
+
+/* ============== SALVAR UNIT ============== */
+function salvarUnit() {
+  const data = document.getElementById('r-data').value || hoje();
+  const cenario = document.getElementById('r-cenario').value;
+  const status = state.status;
+  const descricao = document.getElementById('r-desc').value.trim();
+  if (!cenario) { alert('Escolha um cenário.'); return; }
+  if (!status) { alert('Escolha um status (OK / Parcial / Erro).'); return; }
+  if (!descricao) { alert('Descreva o que aconteceu.'); return; }
+  if ((status === 'Parcial' || status === 'Erro')) {
+    const cat = document.getElementById('r-categoria').value;
+    const sev = state.severidade;
+    if (!cat) { alert('Escolha uma categoria do erro.'); return; }
+    if (!sev) { alert('Escolha uma severidade.'); return; }
+  }
+  const fp = detectarBrowser();
+  const reg = {
+    id: uid(),
+    data,
+    hora: document.getElementById('r-hora').value || '',
+    testador: document.getElementById('r-testador').value.trim(),
+    cenario,
+    status,
+    categoria: document.getElementById('r-categoria').value || '',
+    severidade: state.severidade || '',
+    prosseguiu: document.getElementById('r-prosseguiu').value || '',
+    fornecedor: document.getElementById('r-fornecedor').value.trim(),
+    valor: document.getElementById('r-valor').value.trim(),
+    cardId: document.getElementById('r-cardid').value.trim(),
+    tempo: document.getElementById('r-tempo').value || '',
+    descricao,
+    reproducao: document.getElementById('r-repro').value.trim(),
+    print: document.getElementById('r-print').value.trim(),
+    msgErro: document.getElementById('r-msg-erro').value.trim(),
+    browser: fp.browser,
+    os: fp.os,
+    dispositivo: fp.dispositivo,
+    criadoEm: new Date().toISOString()
+  };
+  state.registros.push(reg);
+  save();
+  showAlert('alert-salvo');
+  limparForm();
+  renderTudo();
+}
+
+function limparForm() {
+  ['r-cenario','r-fornecedor','r-valor','r-cardid','r-desc','r-repro','r-print','r-msg-erro','r-categoria','r-prosseguiu','r-tempo','r-hora'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.querySelectorAll('#r-status-pills .pill, #r-severidade-pills .pill').forEach(p => p.classList.remove('active','ok','parcial','erro','sev-blq','sev-cnt','sev-csm'));
+  state.status = null;
+  state.severidade = null;
+  /* mantém data e testador */
+  document.getElementById('r-data').value = hoje();
+  toggleCondicionalErro();
+}
+
+function toggleCondicionalErro() {
+  const condE = document.getElementById('cond-erro');
+  const condR = document.getElementById('cond-reproducao');
+  const isErro = state.status === 'Parcial' || state.status === 'Erro';
+  condE.classList.toggle('show', isErro);
+  condR.classList.toggle('show', isErro);
+}
+
+/* ============== LOTE ============== */
+function addLoteRow(prefill = {}) {
+  const idx = state.loteRows.length;
+  state.loteRows.push({ id: uid(), ...prefill });
+  const c = document.getElementById('lote-rows');
+  if (idx === 0) {
+    c.innerHTML = '<div class="lote-row" style="font-weight:600; font-size:11px; color:var(--lx-neutral-600); text-transform: uppercase; letter-spacing: 0.05em;"><div>Data</div><div>Cenário</div><div>Fornecedor</div><div>O que aconteceu</div><div>Status</div><div></div></div>';
+  }
+  const row = document.createElement('div');
+  row.className = 'lote-row';
+  row.dataset.idx = idx;
+  row.innerHTML = `
+    <input type="date" class="input" value="${hoje()}" />
+    <select class="input">${'<option value="">Selecione...</option>' + CENARIOS.map(c => '<option>' + c + '</option>').join('')}</select>
+    <input type="text" class="input" placeholder="Fornecedor / valor / desc" />
+    <input type="text" class="input" placeholder="O que aconteceu" />
+    <select class="input"><option value="OK">✅ OK</option><option value="Parcial">⚠️ Parcial</option><option value="Erro">❌ Erro</option></select>
+    <button type="button" onclick="this.parentElement.remove()">×</button>
+  `;
+  c.appendChild(row);
+}
+
+function salvarLote() {
+  const c = document.getElementById('lote-rows');
+  const rows = c.querySelectorAll('.lote-row');
+  let saved = 0;
+  const fp = detectarBrowser();
+  rows.forEach((r, i) => {
+    if (i === 0) return; /* header row */
+    const inputs = r.querySelectorAll('input, select');
+    if (inputs.length < 5) return;
+    const cenario = inputs[1].value;
+    if (!cenario) return;
+    const reg = {
+      id: uid(),
+      data: inputs[0].value || hoje(),
+      cenario,
+      fornecedor: inputs[2].value.trim(),
+      descricao: inputs[3].value.trim(),
+      status: inputs[4].value,
+      categoria: '', severidade: '', prosseguiu: '',
+      testador: '', valor: '', cardId: '', tempo: '',
+      reproducao: '', print: '', msgErro: '',
+      browser: fp.browser, os: fp.os, dispositivo: fp.dispositivo,
+      criadoEm: new Date().toISOString()
+    };
+    state.registros.push(reg);
+    saved++;
+  });
+  if (saved > 0) {
+    save();
+    showAlert('alert-lote', `✓ ${saved} registro(s) salvo(s).`);
+    limparLote();
+    renderTudo();
+  } else {
+    alert('Nada para salvar. Selecione um cenário em pelo menos uma linha.');
+  }
+}
+function limparLote() {
+  document.getElementById('lote-rows').innerHTML = '';
+  state.loteRows = [];
+  addLoteRow();
+}
+
+/* ============== TABELA ============== */
+function renderTabela() {
+  const tbody = document.getElementById('tbl-body');
+  const empty = document.getElementById('empty-state');
+  const fBusca = (document.getElementById('f-busca').value || '').toLowerCase();
+  const fStatus = document.getElementById('f-status').value;
+  const fCat = document.getElementById('f-categoria').value;
+  const fSev = document.getElementById('f-severidade').value;
+
+  /* Atualiza categorias no filtro */
+  const cats = [...new Set(state.registros.map(r => r.categoria).filter(Boolean))];
+  const fCatEl = document.getElementById('f-categoria');
+  const valAtual = fCatEl.value;
+  fCatEl.innerHTML = '<option value="">Todas</option>' + cats.map(c => `<option value="${c}" ${c===valAtual?'selected':''}>${c}</option>`).join('');
+
+  const filtrados = state.registros.filter(r => {
+    if (fStatus && r.status !== fStatus) return false;
+    if (fCat && r.categoria !== fCat) return false;
+    if (fSev && r.severidade !== fSev) return false;
+    if (fBusca) {
+      const blob = [r.cenario, r.fornecedor, r.descricao, r.categoria, r.testador, r.msgErro].filter(Boolean).join(' ').toLowerCase();
+      if (!blob.includes(fBusca)) return false;
+    }
+    return true;
+  }).sort((a, b) => (b.criadoEm || '').localeCompare(a.criadoEm || ''));
+
+  empty.style.display = filtrados.length ? 'none' : 'block';
+
+  tbody.innerHTML = filtrados.map(r => `
+    <tr>
+      <td>${fmtData(r.data)}${r.hora ? ' <span style="color:var(--lx-neutral-600);font-size:11px;">'+r.hora+'</span>' : ''}</td>
+      <td style="max-width: 200px;">${r.cenario || '—'}</td>
+      <td>${r.fornecedor || '—'}</td>
+      <td>${r.valor || '—'}</td>
+      <td><span class="status-badge ${r.status === 'OK' ? 'ok' : r.status === 'Parcial' ? 'parcial' : 'erro'}">${r.status}</span></td>
+      <td>${r.severidade ? '<span class="meta-chip">'+r.severidade+'</span>' : '—'}</td>
+      <td style="font-size: 12px;">${r.categoria || '—'}</td>
+      <td style="max-width: 280px; white-space: normal; font-size: 12px;">${(r.descricao || '').slice(0, 180)}${r.descricao && r.descricao.length > 180 ? '…' : ''}</td>
+      <td>${r.cardId ? '#'+r.cardId : '—'}</td>
+      <td>
+        <div class="row-actions">
+          <button title="Ver detalhe" onclick="verDetalhe('${r.id}')">👁️</button>
+          <button title="Apagar" onclick="apagarReg('${r.id}')">🗑️</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function verDetalhe(id) {
+  const r = state.registros.find(x => x.id === id);
+  if (!r) return;
+  const linhas = [
+    ['📅 Data', fmtData(r.data) + (r.hora ? ' às ' + r.hora : '')],
+    ['🧑 Testador', r.testador || '—'],
+    ['🧪 Cenário', r.cenario],
+    ['📊 Status', r.status],
+    ['🏷️ Categoria', r.categoria || '—'],
+    ['🚨 Severidade', r.severidade || '—'],
+    ['🚪 Conseguiu prosseguir?', r.prosseguiu || '—'],
+    ['🏢 Fornecedor', r.fornecedor || '—'],
+    ['💰 Valor', r.valor || '—'],
+    ['#️⃣ Card Pipefy', r.cardId ? '#'+r.cardId : '—'],
+    ['⏱️ Tempo gasto', r.tempo || '—'],
+    ['💻 Browser', r.browser || '—'],
+    ['🖥️ SO/Disp.', (r.os || '—') + ' / ' + (r.dispositivo || '—')],
+    [],
+    ['📝 O que aconteceu', r.descricao],
+  ];
+  if (r.reproducao) linhas.push(['🔁 Reprodução', r.reproducao]);
+  if (r.msgErro) linhas.push(['⚠️ Mensagem de erro', r.msgErro]);
+  if (r.print) linhas.push(['🖼️ Print', r.print]);
+  const txt = linhas.map(l => l.length === 0 ? '' : l[0] + ': ' + l[1]).join('\n');
+  alert(txt);
+}
+
+function apagarReg(id) {
+  if (!confirm('Apagar esse registro?')) return;
+  state.registros = state.registros.filter(r => r.id !== id);
+  save();
+  renderTudo();
+}
+
+function apagarTodos() {
+  if (!confirm('Apagar TODOS os ' + state.registros.length + ' registros? Isso não pode ser desfeito.')) return;
+  if (!confirm('Tem certeza absoluta? Faça o backup com "⬇️ JSON" antes.')) return;
+  state.registros = [];
+  save();
+  renderTudo();
+}
+
+/* ============== KPIs + Painel ============== */
+function renderKPIs() {
+  const t = state.registros.length;
+  const ok = state.registros.filter(r => r.status === 'OK').length;
+  const pa = state.registros.filter(r => r.status === 'Parcial').length;
+  const er = state.registros.filter(r => r.status === 'Erro').length;
+  document.getElementById('kpi-total').textContent = t;
+  document.getElementById('kpi-ok').textContent = ok;
+  document.getElementById('kpi-parcial').textContent = pa;
+  document.getElementById('kpi-erro').textContent = er;
+  const taxa = t ? Math.round((ok / t) * 100) : null;
+  document.getElementById('kpi-taxa').textContent = taxa == null ? '—' : (taxa + '%');
+  document.getElementById('kpi-total-sub').textContent = t ? (t === 1 ? '1 teste' : t + ' testes') : 'aguardando';
+  document.getElementById('kpi-ok-pct').textContent = t ? Math.round(ok/t*100) + '% do total' : '—';
+  document.getElementById('kpi-parcial-pct').textContent = t ? Math.round(pa/t*100) + '% do total' : '—';
+  document.getElementById('kpi-erro-pct').textContent = t ? Math.round(er/t*100) + '% do total' : '—';
+}
+
+function renderOfensores() {
+  const c = document.getElementById('ofensores');
+  if (state.registros.length === 0) {
+    c.innerHTML = '<div class="empty">Sem dados ainda. Comece registrando testes acima.</div>';
+    return;
+  }
+  /* Agrupa por cenário, conta OK/Parcial/Erro */
+  const agg = {};
+  state.registros.forEach(r => {
+    if (!agg[r.cenario]) agg[r.cenario] = { ok: 0, parcial: 0, erro: 0, total: 0 };
+    agg[r.cenario].total++;
+    if (r.status === 'OK') agg[r.cenario].ok++;
+    else if (r.status === 'Parcial') agg[r.cenario].parcial++;
+    else if (r.status === 'Erro') agg[r.cenario].erro++;
+  });
+  const ranking = Object.entries(agg)
+    .map(([cen, v]) => ({ cen, ...v, problemas: v.erro + v.parcial }))
+    .filter(r => r.problemas > 0)
+    .sort((a, b) => b.problemas - a.problemas || b.erro - a.erro)
+    .slice(0, 10);
+
+  if (ranking.length === 0) {
+    c.innerHTML = '<div class="empty" style="color: var(--lx-green);">🎉 Nenhum cenário com problema. Parabéns!</div>';
+    return;
+  }
+  c.innerHTML = ranking.map(r => {
+    const okPct = (r.ok / r.total) * 100;
+    const paPct = (r.parcial / r.total) * 100;
+    const erPct = (r.erro / r.total) * 100;
+    return `
+      <div class="chart-bar-row">
+        <div class="label" title="${r.cen}">${r.cen}</div>
+        <div class="bar-container">
+          <div class="seg-ok" style="width: ${okPct}%"></div>
+          <div class="seg-parcial" style="width: ${paPct}%"></div>
+          <div class="seg-erro" style="width: ${erPct}%"></div>
+        </div>
+        <div class="count">${r.erro}❌ ${r.parcial}⚠️</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderCategorias() {
+  const c = document.getElementById('categorias');
+  const agg = {};
+  state.registros.filter(r => r.categoria).forEach(r => {
+    if (!agg[r.categoria]) agg[r.categoria] = 0;
+    agg[r.categoria]++;
+  });
+  const ranking = Object.entries(agg).sort((a, b) => b[1] - a[1]);
+  if (ranking.length === 0) {
+    c.innerHTML = '<div class="empty">Categorias aparecem aqui conforme você registra erros.</div>';
+    return;
+  }
+  c.innerHTML = ranking.map(([cat, n]) => `
+    <div class="cat-tile">
+      <div class="cat-label">${cat}</div>
+      <div class="cat-value">${n}</div>
+    </div>
+  `).join('');
+}
+
+function renderSeveridade() {
+  const c = document.getElementById('severidade-list');
+  const total = state.registros.filter(r => r.severidade).length;
+  if (total === 0) {
+    c.innerHTML = '<div class="empty">Severidades aparecem aqui conforme você registra erros.</div>';
+    return;
+  }
+  const sevs = ['Bloqueante', 'Contornável', 'Cosmético'];
+  const cores = { Bloqueante: 'var(--lx-red)', 'Contornável': 'var(--lx-secondary-pure)', Cosmético: 'var(--lx-neutral-600)' };
+  c.innerHTML = sevs.map(s => {
+    const n = state.registros.filter(r => r.severidade === s).length;
+    const pct = total ? Math.round(n/total*100) : 0;
+    return `
+      <div style="margin-bottom: 10px;">
+        <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px;">
+          <span style="font-weight:500;">${s}</span>
+          <span style="color: ${cores[s]}; font-weight:600;">${n} <span style="color:var(--lx-neutral-600); font-weight:400; font-size:11px;">(${pct}%)</span></span>
+        </div>
+        <div style="height: 6px; background: var(--lx-bg-sunken); border-radius: 3px; overflow: hidden;">
+          <div style="height: 100%; background: ${cores[s]}; width: ${pct}%; transition: width 0.3s;"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderAtividadeDia() {
+  const c = document.getElementById('atividade-dia');
+  const agg = {};
+  state.registros.forEach(r => {
+    const d = r.data || hoje();
+    if (!agg[d]) agg[d] = { ok: 0, parcial: 0, erro: 0, total: 0 };
+    agg[d].total++;
+    if (r.status === 'OK') agg[d].ok++;
+    else if (r.status === 'Parcial') agg[d].parcial++;
+    else if (r.status === 'Erro') agg[d].erro++;
+  });
+  const dias = Object.keys(agg).sort();
+  if (dias.length === 0) {
+    c.innerHTML = '<div class="empty">Atividade aparece aqui conforme registros chegam.</div>';
+    return;
+  }
+  const maxTotal = Math.max(...Object.values(agg).map(v => v.total));
+  c.innerHTML = dias.slice(-14).map(d => {
+    const v = agg[d];
+    const okPct = (v.ok / maxTotal) * 100;
+    const paPct = (v.parcial / maxTotal) * 100;
+    const erPct = (v.erro / maxTotal) * 100;
+    return `
+      <div class="chart-bar-row">
+        <div class="label">${fmtData(d)}</div>
+        <div class="bar-container" style="background: var(--lx-bg-sunken);">
+          <div class="seg-ok" style="width: ${okPct}%"></div>
+          <div class="seg-parcial" style="width: ${paPct}%"></div>
+          <div class="seg-erro" style="width: ${erPct}%"></div>
+        </div>
+        <div class="count">${v.total}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderTudo() {
+  renderKPIs();
+  renderOfensores();
+  renderCategorias();
+  renderSeveridade();
+  renderAtividadeDia();
+  renderTabela();
+}
+
+/* ============== TABS ============== */
+function switchTab(ev, id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  ev.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+/* ============== EXPORT ============== */
+function exportarJSON() {
+  const payload = {
+    exportadoEm: new Date().toISOString(),
+    fonte: 'Guia de Testes Logcomex v2',
+    registros: state.registros,
+    feedback: state.feedback
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `guia-testes-logcomex-${hoje()}.json`;
+  a.click();
+}
+
+function exportarCSV() {
+  if (state.registros.length === 0) { alert('Nada para exportar.'); return; }
+  const cabec = ['Data','Hora','Testador','Cenario','Status','Categoria','Severidade','Conseguiu_prosseguir','Fornecedor','Valor','Card_Pipefy','Tempo_gasto','Descricao','Reproducao','Mensagem_erro','Link_print','Browser','SO','Dispositivo','Criado_em'];
+  const rows = state.registros.map(r => [
+    r.data, r.hora, r.testador, r.cenario, r.status, r.categoria, r.severidade, r.prosseguiu,
+    r.fornecedor, r.valor, r.cardId, r.tempo, r.descricao, r.reproducao, r.msgErro, r.print,
+    r.browser, r.os, r.dispositivo, r.criadoEm
+  ]);
+  const escape = v => {
+    const s = String(v == null ? '' : v).replace(/"/g, '""');
+    return /[,;"\n]/.test(s) ? `"${s}"` : s;
+  };
+  const csv = [cabec, ...rows].map(row => row.map(escape).join(';')).join('\n');
+  /* BOM pra Excel reconhecer UTF-8 */
+  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `guia-testes-logcomex-${hoje()}.csv`;
+  a.click();
+}
+
+/* ============== FEEDBACK ============== */
+function buildNotaSlider() {
+  const c = document.getElementById('nota-slider');
+  c.innerHTML = '';
+  for (let i = 0; i <= 10; i++) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'nota-btn';
+    b.textContent = i;
+    b.dataset.val = i;
+    b.addEventListener('click', () => {
+      c.querySelectorAll('.nota-btn').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      state.feedback.nota = i;
+    });
+    c.appendChild(b);
   }
 }
 
-// ── UNITÁRIO ──
-function clearUnitario(){
-  document.getElementById('reg_data').value=today();
-  document.getElementById('reg_cenario').value='';
-  document.getElementById('reg_fornecedor').value='';
-  document.getElementById('reg_valor').value='';
-  document.getElementById('reg_obs').value='';
-  document.querySelectorAll('#statusBtns .status-btn').forEach(b=>b.classList.remove('selected'));
-  statusSel='';
-}
-
-async function addUnitario(){
-  const cenario=document.getElementById('reg_cenario').value;
-  if(!cenario){toast('Selecione o cenário testado',true);return;}
-  if(!statusSel){toast('Marque o status (OK, Parcial ou Erro)',true);return;}
-  const row={data_teste:document.getElementById('reg_data').value||today(),cenario,
-    fornecedor:document.getElementById('reg_fornecedor').value.trim(),
-    valor:document.getElementById('reg_valor').value.trim(),
-    status:statusSel,
-    observacao:document.getElementById('reg_obs').value.trim(),
-    created_at:new Date().toISOString()};
-  try{
-    const res=await fetch(`${SUPA}/rest/v1/${TREG}`,{method:'POST',headers:H,body:JSON.stringify(row)});
-    const rows=await res.json();
-    if(rows&&rows[0]){renderRow(rows[0],true);clearUnitario();toast('Registro salvo! ✓');}
-    else{toast('Erro ao salvar',true);console.error(rows);}
-  }catch(e){toast('Erro de conexão',true);}
-}
-
-// ── LOTE ──
-const CENARIOS=[
-  '','1 — Login com e-mail corporativo','2 — Login com e-mail não cadastrado',
-  '3 — Upload NF nacional (boleto)','4 — Upload invoice internacional',
-  '5 — NF com imposto / retenção','6 — NF duplicada','7 — Trocar NF após preenchimento',
-  '8 — Fornecedor existente na base','9 — Fornecedor novo','10 — NF emitida para empresa errada',
-  '11 — Frequência Parcelado','12 — Pagamento TED — campo banco','13 — Campo descrição automático',
-  '14 — Data da despesa — reembolso','15 — Fluxo internacional','16 — Envio completo de solicitação',
-  '17 — Tela de resumo antes do envio','18 — Solicitar ajuste após envio',
-  '19 — Minhas solicitações','20 — Notificação Slack'
-];
-
-function addLoteRow(){
-  const wrap=document.getElementById('loteRows');
-  const idx=wrap.children.length;
-  const opts=CENARIOS.map((c,i)=>`<option value="${c}"${i===0?'':''} >${c||'Selecione...'}</option>`).join('');
-  const div=document.createElement('div');
-  div.className='lote-row';
-  div.innerHTML=`
-    <input type="date" value="${today()}" class="lr-data">
-    <select class="lr-cenario">${opts}</select>
-    <input type="text" placeholder="Fornecedor (opcional)" class="lr-forn">
-    <input type="text" placeholder="O que aconteceu..." class="lr-obs">
-    <select class="lr-status">
-      <option value="">Status...</option>
-      <option value="ok">✅ OK</option>
-      <option value="parcial">⚠️ Parcial</option>
-      <option value="erro">❌ Erro</option>
-    </select>
-    <button class="btn-del-lote" onclick="this.closest('.lote-row').remove()">✕</button>`;
-  wrap.appendChild(div);
-}
-
-async function salvarLote(){
-  const rows=document.querySelectorAll('#loteRows .lote-row');
-  const valid=[];
-  rows.forEach(row=>{
-    const cenario=row.querySelector('.lr-cenario').value;
-    const status =row.querySelector('.lr-status').value;
-    if(!cenario||!status) return;
-    valid.push({
-      data_teste:row.querySelector('.lr-data').value||today(),
-      cenario,
-      fornecedor:row.querySelector('.lr-forn').value.trim(),
-      observacao:row.querySelector('.lr-obs').value.trim(),
-      valor:'',status,
-      created_at:new Date().toISOString()
+function buildComp() {
+  const c = document.getElementById('comp-grid');
+  c.querySelectorAll('.comp-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      c.querySelectorAll('.comp-btn').forEach(x => x.classList.remove('active'));
+      btn.classList.add('active');
+      state.feedback.comparacao = btn.dataset.val;
     });
   });
-  if(!valid.length){toast('Preencha cenário e status em pelo menos uma linha',true);return;}
-  try{
-    const res=await fetch(`${SUPA}/rest/v1/${TREG}`,{method:'POST',headers:H,body:JSON.stringify(valid)});
-    const saved=await res.json();
-    if(saved&&saved.length){
-      saved.forEach(r=>renderRow(r,true));
-      document.getElementById('loteRows').innerHTML='';
-      addLoteRow();
-      toast(`${saved.length} registro(s) salvos! ✓`);
-    }else{toast('Erro ao salvar lote',true);console.error(saved);}
-  }catch(e){toast('Erro de conexão',true);}
 }
 
-// ── LOAD REGISTROS ──
-async function loadRegistros(){
-  try{
-    const res=await fetch(`${SUPA}/rest/v1/${TREG}?order=created_at.desc`,{headers:H});
-    const rows=await res.json();
-    if(rows&&rows.length){
-      rows.forEach(r=>renderRow(r));
-    } else {
-      document.getElementById('regEmpty').style.display='block';
-    }
-  }catch(e){console.error(e);}
+function salvarFeedback() {
+  state.feedback.tempoAnterior = document.getElementById('fb-tempo-old').value;
+  state.feedback.tempoNovo = document.getElementById('fb-tempo-new').value;
+  state.feedback.bom = document.getElementById('fb-bom').value;
+  state.feedback.ruim = document.getElementById('fb-ruim').value;
+  state.feedback.sugestoes = document.getElementById('fb-sugest').value;
+  state.feedback.livre = document.getElementById('fb-livre').value;
+  state.feedback.atualizadoEm = new Date().toISOString();
+  saveFeedback();
+  showAlert('alert-fb');
 }
 
-// ── FEEDBACK ──
-function setNPS(val,btn){
-  document.querySelectorAll('#npsRow .nps-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-  fbSels.nota=val;
-  autoSaveFb();
+function carregarFeedback() {
+  const fb = state.feedback || {};
+  if (fb.nota != null) {
+    const btn = document.querySelector(`#nota-slider .nota-btn[data-val="${fb.nota}"]`);
+    if (btn) btn.click();
+  }
+  if (fb.comparacao) {
+    const btn = document.querySelector(`#comp-grid .comp-btn[data-val="${fb.comparacao}"]`);
+    if (btn) btn.click();
+  }
+  if (fb.tempoAnterior) document.getElementById('fb-tempo-old').value = fb.tempoAnterior;
+  if (fb.tempoNovo) document.getElementById('fb-tempo-new').value = fb.tempoNovo;
+  if (fb.bom) document.getElementById('fb-bom').value = fb.bom;
+  if (fb.ruim) document.getElementById('fb-ruim').value = fb.ruim;
+  if (fb.sugestoes) document.getElementById('fb-sugest').value = fb.sugestoes;
+  if (fb.livre) document.getElementById('fb-livre').value = fb.livre;
 }
 
-function selCard(el,group,val){
-  document.querySelectorAll(`#${group} .select-card`).forEach(c=>c.classList.remove('selected'));
-  el.classList.add('selected');
-  fbSels[group]=val;
-  autoSaveFb();
+/* ============== ALERTS ============== */
+function showAlert(id, msg) {
+  const el = document.getElementById(id);
+  if (msg) el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2800);
 }
 
-function autoSaveFb(){
-  clearTimeout(fbTimer);
-  fbTimer=setTimeout(salvarFeedback,1200);
+/* ============== INIT ============== */
+function init() {
+  load();
+  popularCenarios();
+  bindPills('r-status-pills', (v) => { state.status = v; toggleCondicionalErro(); });
+  bindPills('r-severidade-pills', (v) => { state.severidade = v; });
+  document.getElementById('r-data').value = hoje();
+  /* Browser fingerprint */
+  const fp = detectarBrowser();
+  document.getElementById('fingerprint').textContent =
+    `📡 Será capturado ao salvar: ${fp.browser} · ${fp.os} · ${fp.dispositivo}`;
+  buildNotaSlider();
+  buildComp();
+  carregarFeedback();
+  addLoteRow();
+  renderTudo();
+  console.log('%c[Guia de testes Logcomex v2 carregado]', 'background:#6613D0;color:white;padding:3px 8px;border-radius:3px');
 }
 
-async function salvarFeedback(){
-  const data={
-    nota_geral: fbSels.nota!==undefined?fbSels.nota:null,
-    comparacao: fbSels.comparacao||null,
-    tempo_antes: document.getElementById('fb_tempo_antes').value,
-    tempo_novo:  document.getElementById('fb_tempo_novo').value,
-    positivo:    document.getElementById('fb_positivo').value.trim(),
-    negativo:    document.getElementById('fb_negativo').value.trim(),
-    sugestoes:   document.getElementById('fb_sugestoes').value.trim(),
-    livre:       document.getElementById('fb_livre').value.trim(),
-    updated_at:  new Date().toISOString()
-  };
-  try{
-    let res;
-    if(fbId){
-      res=await fetch(`${SUPA}/rest/v1/${TFB}?id=eq.${fbId}`,{method:'PATCH',headers:H,body:JSON.stringify(data)});
-    }else{
-      res=await fetch(`${SUPA}/rest/v1/${TFB}`,{method:'POST',headers:H,body:JSON.stringify(data)});
-      const rows=await res.json();
-      if(rows&&rows[0]) fbId=rows[0].id;
-    }
-    const s=document.getElementById('fbSaved');
-    s.classList.add('show');
-    setTimeout(()=>s.classList.remove('show'),2500);
-  }catch(e){console.error(e);}
-}
-
-// ── UTILS ──
-function today(){ return new Date().toISOString().slice(0,10); }
-
-// ── INIT ──
-document.getElementById('reg_data').value=today();
-loadRegistros();
-addLoteRow();
+document.addEventListener('DOMContentLoaded', init);
 </script>
-</body>
-</html>
+
+
+</body></html>
