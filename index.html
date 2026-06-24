@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Testes — Formulário de Pagamentos | Logcomex</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Funnel+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#F5F6FC;font-family:'Poppins',sans-serif;font-size:14px;color:#0B0D19;line-height:1.6}
+
+.header{background:linear-gradient(135deg,#2D085D,#6613D0);padding:32px;color:#fff}
+.header-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:18px}
+.header-text .tag{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;opacity:.7;margin-bottom:6px}
+.header-text h1{font-family:'Funnel Display',sans-serif;font-size:24px;line-height:1.2}
+.header-text p{font-size:12px;opacity:.75;margin-top:6px}
+
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+
+.card{background:#fff;border-radius:14px;border:1px solid rgba(11,13,25,.08);padding:24px 28px;margin-bottom:20px}
+.card-title{font-family:'Funnel Display',sans-serif;font-size:17px;color:#2D085D;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.card-title .icon{width:36px;height:36px;border-radius:9px;background:#F3EDFC;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.card p{color:#5F616A;font-size:13px;line-height:1.7}
+
+.link-box{display:inline-flex;align-items:center;gap:10px;background:#F3EDFC;border:1.5px solid #E2D0FA;border-radius:10px;padding:12px 18px;margin-top:10px}
+.link-box a{font-weight:600;color:#6613D0;text-decoration:none;font-size:14px}
+.link-box a:hover{text-decoration:underline}
+
+/* ── REGISTRO ── */
+.reg-tabs{display:flex;gap:6px;margin-bottom:16px}
+.reg-tab{padding:7px 18px;border-radius:8px;border:1.5px solid rgba(11,13,25,.1);background:#fff;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:#5F616A;cursor:pointer;transition:all .15s}
+.reg-tab.active{background:#6613D0;border-color:#6613D0;color:#fff}
+
+/* modo unitário */
+.reg-form{background:#FAFAFE;border-radius:10px;border:1px solid #E2D0FA;padding:16px 18px}
+.reg-row3{display:grid;grid-template-columns:140px 1fr 216px;gap:12px;margin-bottom:10px}
+.reg-row2{display:grid;grid-template-columns:1fr 160px;gap:12px;margin-bottom:10px}
+.reg-field label{display:block;font-size:10px;font-weight:700;color:#2D085D;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.reg-field input,.reg-field select,.reg-field textarea{width:100%;font-family:'Poppins',sans-serif;font-size:12px;border:1.5px solid rgba(11,13,25,.1);border-radius:7px;padding:8px 11px;background:#fff;color:#0B0D19;outline:none;transition:border .2s;resize:none}
+.reg-field input:focus,.reg-field select:focus,.reg-field textarea:focus{border-color:#6613D0}
+.status-btns{display:flex;gap:6px}
+.status-btn{flex:1;border:2px solid rgba(11,13,25,.1);border-radius:7px;background:#fff;font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;padding:8px 4px;cursor:pointer;transition:all .15s}
+.s-ok.selected{background:#E8F8F0;border-color:#1FAC66;color:#0D5C36}
+.s-parcial.selected{background:#FFF3E0;border-color:#FE8F1C;color:#7A3B00}
+.s-erro.selected{background:#FDEAEA;border-color:#C70404;color:#C70404}
+
+/* modo lote */
+.lote-hint{font-size:12px;color:#5F616A;margin-bottom:12px;line-height:1.6}
+.lote-row{display:grid;grid-template-columns:110px 1fr 1fr 130px 110px 28px;gap:8px;align-items:center;margin-bottom:8px}
+.lote-row input,.lote-row select{font-family:'Poppins',sans-serif;font-size:11px;border:1.5px solid rgba(11,13,25,.1);border-radius:6px;padding:7px 9px;background:#fff;color:#0B0D19;outline:none;width:100%}
+.lote-row input:focus,.lote-row select:focus{border-color:#6613D0}
+.lote-head{display:grid;grid-template-columns:110px 1fr 1fr 130px 110px 28px;gap:8px;margin-bottom:6px}
+.lote-head span{font-size:10px;font-weight:700;color:#2D085D;text-transform:uppercase;letter-spacing:.04em}
+.btn-add-lote-row{background:none;border:1.5px dashed #E2D0FA;border-radius:6px;color:#6613D0;font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;padding:7px 14px;cursor:pointer;margin-top:4px}
+.btn-add-lote-row:hover{background:#F3EDFC}
+.btn-del-lote{background:none;border:none;cursor:pointer;color:#ccc;font-size:14px;line-height:1}
+.btn-del-lote:hover{color:#C70404}
+
+.btn-reg-add{background:#6613D0;color:#fff;border:none;border-radius:8px;padding:9px 22px;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:background .15s}
+.btn-reg-add:hover{background:#2D085D}
+
+/* tabela */
+.reg-table-wrap{margin-top:20px}
+.reg-table-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.reg-table-title{font-size:11px;font-weight:700;color:#2D085D;text-transform:uppercase;letter-spacing:.06em}
+.reg-count{font-size:11px;color:#5F616A}
+.reg-scroll{overflow-x:auto}
+.reg-table{width:100%;border-collapse:collapse;font-size:11px}
+.reg-table thead tr{background:#F3EDFC}
+.reg-table th{color:#2D085D;font-weight:700;padding:8px 12px;text-align:left;white-space:nowrap;border-bottom:2px solid #E2D0FA}
+.reg-table td{padding:8px 12px;border-bottom:1px solid #F5F3FC;vertical-align:top;line-height:1.45}
+.reg-table tr:hover td{background:#FAFAFE}
+.tag-ok{background:#E8F8F0;color:#0D5C36;font-weight:600;padding:2px 8px;border-radius:20px;font-size:10px;white-space:nowrap}
+.tag-parcial{background:#FFF3E0;color:#7A3B00;font-weight:600;padding:2px 8px;border-radius:20px;font-size:10px;white-space:nowrap}
+.tag-erro{background:#FDEAEA;color:#C70404;font-weight:600;padding:2px 8px;border-radius:20px;font-size:10px;white-space:nowrap}
+.btn-del-reg{background:none;border:none;cursor:pointer;color:#ddd;font-size:13px}
+.btn-del-reg:hover{color:#C70404}
+.empty-msg{text-align:center;padding:24px 0;font-size:12px;color:#bbb}
+
+/* ── FEEDBACK GERAL ── */
+.fb-section{margin-bottom:20px}
+.fb-section-title{font-size:11px;font-weight:700;color:#6613D0;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.fb-textarea{width:100%;font-family:'Poppins',sans-serif;font-size:13px;border:1.5px solid rgba(11,13,25,.1);border-radius:8px;padding:10px 14px;background:#fff;color:#0B0D19;outline:none;resize:vertical;min-height:80px;transition:border .2s}
+.fb-textarea:focus{border-color:#6613D0}
+
+.select-cards{display:grid;gap:8px}
+.select-card{border:2px solid rgba(11,13,25,.08);border-radius:10px;padding:10px 14px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:10px}
+.select-card:hover{border-color:#6613D0;background:#F3EDFC}
+.select-card.selected{border-color:#6613D0;background:#F3EDFC}
+.select-card .sc-emoji{font-size:18px;flex-shrink:0}
+.select-card .sc-label{font-size:12px;font-weight:600;color:#0B0D19}
+.select-card .sc-desc{font-size:11px;color:#5F616A;margin-top:1px}
+
+.nps-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.nps-btn{min-width:42px;height:42px;border-radius:8px;border:2px solid rgba(11,13,25,.08);background:#fff;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;cursor:pointer;color:#5F616A;transition:all .15s}
+.nps-btn:hover{border-color:#6613D0;background:#F3EDFC;color:#6613D0}
+.nps-btn.selected{background:#6613D0;border-color:#6613D0;color:#fff}
+.nps-labels{display:flex;justify-content:space-between;font-size:10px;color:#aaa;margin-top:4px}
+
+.fb-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+.btn-fb-submit{background:linear-gradient(135deg,#2D085D,#6613D0);color:#fff;border:none;border-radius:8px;padding:11px 28px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:4px}
+.btn-fb-submit:hover{opacity:.9}
+.fb-saved{display:none;font-size:12px;color:#1FAC66;font-weight:600;margin-top:10px;align-items:center;gap:6px}
+.fb-saved.show{display:flex}
+
+.footer{text-align:center;margin-top:32px;font-size:11px;color:#bbb;padding-top:20px;border-top:1px solid #E2D0FA}
+.footer span{color:#6613D0;font-weight:600}
+
+.toast{position:fixed;bottom:24px;right:24px;background:#1FAC66;color:#fff;font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;padding:10px 18px;border-radius:8px;opacity:0;transform:translateY(8px);transition:all .3s;z-index:999;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.err{background:#C70404}
+
+@media(max-width:680px){
+  .reg-row3{grid-template-columns:1fr}
+  .reg-row2{grid-template-columns:1fr}
+  .lote-row,.lote-head{grid-template-columns:1fr 1fr}
+  .fb-grid2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <svg viewBox="0 0 23.34 23.21" width="48" height="48" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+      <path d="M22.3405 18.0675H17.2352V23.1429H22.3405V18.0675Z" fill="#fff"/>
+      <path d="M5.10529 6.64643L0 11.7254V18.0891C0 20.8816 2.27851 23.1467 5.08749 23.1467H11.4887L16.594 18.0714H5.10529V6.64643Z" fill="#fff"/>
+      <path d="M17.2311 6.01289V17.4343L22.3364 12.3589V0.9375H10.8513L5.746 6.01289H17.2311Z" fill="#E2D0FA"/>
+    </svg>
+    <div class="header-text">
+      <div class="tag">Logcomex · Contas a Pagar</div>
+      <h1>Guia de Testes — Novo Formulário de Pagamentos</h1>
+      <p>Período de testes: 2 semanas &nbsp;·&nbsp; Seus registros são salvos automaticamente</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- Acesso -->
+  <div class="card">
+    <div class="card-title"><div class="icon">🔗</div>Acesso ao formulário</div>
+    <p>Use seu e-mail corporativo Logcomex para fazer login. Em caso de problema de acesso, fale com Kamilla ou Thaiane (CP).</p>
+    <div class="link-box">
+      <span>🔗</span>
+      <a href="https://pagamentos-logcomexv3.pages.dev" target="_blank">pagamentos-logcomexv3.pages.dev</a>
+    </div>
+  </div>
+
+  <!-- Registro de Testes -->
+  <div class="card">
+    <div class="card-title"><div class="icon">📋</div>Registro de Testes — Caso a Caso</div>
+    <p style="margin-bottom:14px">Para cada solicitação que você enviar pelo formulário, registre aqui o resultado. O time CP acompanha em tempo real.</p>
+
+    <!-- tabs -->
+    <div class="reg-tabs">
+      <button class="reg-tab active" onclick="switchTab('unitario',this)">📝 Registro unitário</button>
+      <button class="reg-tab" onclick="switchTab('lote',this)">📦 Registrar em lote</button>
+    </div>
+
+    <!-- modo unitário -->
+    <div id="modoUnitario" class="reg-form">
+      <div class="reg-row3">
+        <div class="reg-field">
+          <label>Data</label>
+          <input type="date" id="reg_data">
+        </div>
+        <div class="reg-field">
+          <label>Cenário testado</label>
+          <select id="reg_cenario">
+            <option value="">Selecione...</option>
+            <option>1 — Login com e-mail corporativo</option>
+            <option>2 — Login com e-mail não cadastrado</option>
+            <option>3 — Upload NF nacional (boleto)</option>
+            <option>4 — Upload invoice internacional</option>
+            <option>5 — NF com imposto / retenção</option>
+            <option>6 — NF duplicada</option>
+            <option>7 — Trocar NF após preenchimento</option>
+            <option>8 — Fornecedor existente na base</option>
+            <option>9 — Fornecedor novo</option>
+            <option>10 — NF emitida para empresa errada</option>
+            <option>11 — Frequência Parcelado</option>
+            <option>12 — Pagamento TED — campo banco</option>
+            <option>13 — Campo descrição automático</option>
+            <option>14 — Data da despesa — reembolso</option>
+            <option>15 — Fluxo internacional</option>
+            <option>16 — Envio completo de solicitação</option>
+            <option>17 — Tela de resumo antes do envio</option>
+            <option>18 — Solicitar ajuste após envio</option>
+            <option>19 — Minhas solicitações</option>
+            <option>20 — Notificação Slack</option>
+          </select>
+        </div>
+        <div class="reg-field">
+          <label>Status</label>
+          <div class="status-btns" id="statusBtns">
+            <button class="status-btn s-ok" onclick="setStatus('ok',this)">✅ OK</button>
+            <button class="status-btn s-parcial" onclick="setStatus('parcial',this)">⚠️ Parcial</button>
+            <button class="status-btn s-erro" onclick="setStatus('erro',this)">❌ Erro</button>
+          </div>
+        </div>
+      </div>
+      <div class="reg-row2">
+        <div class="reg-field">
+          <label>Fornecedor / Descrição <span style="font-weight:400;opacity:.6">(opcional)</span></label>
+          <input type="text" id="reg_fornecedor" placeholder="Ex: SERPRO, Reembolso João...">
+        </div>
+        <div class="reg-field">
+          <label>Valor <span style="font-weight:400;opacity:.6">(opcional)</span></label>
+          <input type="text" id="reg_valor" placeholder="Ex: R$ 1.200,00">
+        </div>
+      </div>
+      <div class="reg-field">
+        <label>O que aconteceu</label>
+        <textarea id="reg_obs" rows="2" placeholder="Ex: IA preencheu fornecedor errado. / Card não apareceu no Pipefy. / Tudo certo, subiu normalmente."></textarea>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:12px">
+        <button class="btn-reg-add" onclick="addUnitario()">+ Adicionar registro</button>
+      </div>
+    </div>
+
+    <!-- modo lote -->
+    <div id="modoLote" class="reg-form" style="display:none">
+      <p class="lote-hint">Preencha várias linhas de uma vez e clique em <strong>Salvar lote</strong>. Útil para registrar vários testes feitos no mesmo dia.</p>
+      <div class="lote-head">
+        <span>Data</span><span>Cenário</span><span>Fornecedor</span><span>O que aconteceu</span><span>Status</span><span></span>
+      </div>
+      <div id="loteRows"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+        <button class="btn-add-lote-row" onclick="addLoteRow()">+ Nova linha</button>
+        <button class="btn-reg-add" onclick="salvarLote()">💾 Salvar lote</button>
+      </div>
+    </div>
+
+    <!-- tabela de registros -->
+    <div class="reg-table-wrap" id="regTableWrap" style="display:none">
+      <div class="reg-table-head">
+        <div class="reg-table-title">Registros salvos</div>
+        <div class="reg-count" id="regCount"></div>
+      </div>
+      <div class="reg-scroll">
+        <table class="reg-table">
+          <thead><tr>
+            <th>Data</th><th>Cenário</th><th>Fornecedor</th><th>Valor</th><th>Status</th><th>O que aconteceu</th><th></th>
+          </tr></thead>
+          <tbody id="regTbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="empty-msg" id="regEmpty">Nenhum registro ainda. Adicione o primeiro acima! 👆</div>
+  </div>
+
+  <!-- Feedback Geral -->
+  <div class="card">
+    <div class="card-title"><div class="icon">💬</div>Feedback Geral</div>
+    <p style="margin-bottom:20px">Compartilhe sua experiência geral com o novo formulário. Não precisa esperar o final das 2 semanas — pode ir preenchendo conforme usar.</p>
+
+    <!-- Nota geral -->
+    <div class="fb-section">
+      <div class="fb-section-title">⭐ Qual nota você dá para o novo formulário?</div>
+      <div class="nps-row" id="npsRow">
+        <button class="nps-btn" onclick="setNPS(0,this)">0</button>
+        <button class="nps-btn" onclick="setNPS(1,this)">1</button>
+        <button class="nps-btn" onclick="setNPS(2,this)">2</button>
+        <button class="nps-btn" onclick="setNPS(3,this)">3</button>
+        <button class="nps-btn" onclick="setNPS(4,this)">4</button>
+        <button class="nps-btn" onclick="setNPS(5,this)">5</button>
+        <button class="nps-btn" onclick="setNPS(6,this)">6</button>
+        <button class="nps-btn" onclick="setNPS(7,this)">7</button>
+        <button class="nps-btn" onclick="setNPS(8,this)">8</button>
+        <button class="nps-btn" onclick="setNPS(9,this)">9</button>
+        <button class="nps-btn" onclick="setNPS(10,this)">10</button>
+      </div>
+      <div class="nps-labels"><span>😤 Péssimo</span><span>🤩 Excelente</span></div>
+    </div>
+
+    <!-- Comparação -->
+    <div class="fb-section">
+      <div class="fb-section-title">⚖️ Comparado ao processo anterior, este formulário é...</div>
+      <div class="select-cards" id="comparacao" style="grid-template-columns:repeat(3,1fr)">
+        <div class="select-card" onclick="selCard(this,'comparacao','muito_melhor')"><span class="sc-emoji">🚀</span><div><div class="sc-label">Muito melhor</div></div></div>
+        <div class="select-card" onclick="selCard(this,'comparacao','melhor')"><span class="sc-emoji">👍</span><div><div class="sc-label">Um pouco melhor</div></div></div>
+        <div class="select-card" onclick="selCard(this,'comparacao','igual')"><span class="sc-emoji">😐</span><div><div class="sc-label">Igual</div></div></div>
+        <div class="select-card" onclick="selCard(this,'comparacao','pior')"><span class="sc-emoji">👎</span><div><div class="sc-label">Um pouco pior</div></div></div>
+        <div class="select-card" onclick="selCard(this,'comparacao','muito_pior')"><span class="sc-emoji">💀</span><div><div class="sc-label">Muito pior</div></div></div>
+        <div class="select-card" onclick="selCard(this,'comparacao','sem_base')"><span class="sc-emoji">🤷</span><div><div class="sc-label">Sem base de comparação</div></div></div>
+      </div>
+    </div>
+
+    <!-- Tempo -->
+    <div class="fb-section">
+      <div class="fb-section-title">⏱️ Quanto tempo você leva para preencher uma solicitação?</div>
+      <div class="fb-grid2">
+        <div class="reg-field">
+          <label>No processo anterior</label>
+          <select id="fb_tempo_antes" onchange="autoSaveFb()">
+            <option value="">Selecione...</option>
+            <option>Menos de 5 min</option><option>5 a 10 min</option><option>10 a 20 min</option>
+            <option>20 a 30 min</option><option>Mais de 30 min</option>
+          </select>
+        </div>
+        <div class="reg-field">
+          <label>No novo formulário</label>
+          <select id="fb_tempo_novo" onchange="autoSaveFb()">
+            <option value="">Selecione...</option>
+            <option>Menos de 5 min</option><option>5 a 10 min</option><option>10 a 20 min</option>
+            <option>20 a 30 min</option><option>Mais de 30 min</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Textos livres -->
+    <div class="fb-grid2" style="margin-bottom:16px">
+      <div class="fb-section">
+        <div class="fb-section-title">🌟 O que funcionou muito bem?</div>
+        <textarea class="fb-textarea" id="fb_positivo" placeholder="O que te surpreendeu positivamente, o que foi fácil, o que agilizou..." oninput="autoSaveFb()"></textarea>
+      </div>
+      <div class="fb-section">
+        <div class="fb-section-title">😤 O que não funcionou ou te frustrou?</div>
+        <textarea class="fb-textarea" id="fb_negativo" placeholder="O que travou, confundiu, ou precisou de uma volta para funcionar..." oninput="autoSaveFb()"></textarea>
+      </div>
+    </div>
+
+    <div class="fb-section" style="margin-bottom:16px">
+      <div class="fb-section-title">💡 Sugestões de melhoria</div>
+      <textarea class="fb-textarea" id="fb_sugestoes" placeholder="O que você mudaria, adicionaria ou removeria do formulário..." oninput="autoSaveFb()" style="min-height:70px"></textarea>
+    </div>
+
+    <div class="fb-section" style="margin-bottom:20px">
+      <div class="fb-section-title">💬 Alguma coisa que não coube nas perguntas acima?</div>
+      <textarea class="fb-textarea" id="fb_livre" placeholder="Fique à vontade para comentar qualquer outra coisa..." oninput="autoSaveFb()" style="min-height:70px"></textarea>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:16px">
+      <button class="btn-fb-submit" onclick="salvarFeedback()">Salvar feedback ✓</button>
+      <div class="fb-saved" id="fbSaved">✅ Feedback salvo!</div>
+    </div>
+  </div>
+
+  <div class="footer">Dúvidas? Fale com <span>Kamilla ou Thaiane</span> — Contas a Pagar Logcomex</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPA = 'https://moikuofjjyvleorbfhay.supabase.co';
+const KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vaWt1b2Zqanl2bGVvcmJmaGF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2ODYyOTgsImV4cCI6MjA5NzI2MjI5OH0.IL-sCw1Pi-QNSPfTVeeI6WEjbnUoGKVCJ6lYdm0aD6o';
+const H    = {'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=representation'};
+const TREG = 'registro_testes';
+const TFB  = 'feedback_geral_testes';
+
+let statusSel = '';
+let fbId = null;
+let fbSels = {};
+let fbTimer = null;
+
+// ── TABS ──
+function switchTab(mode, btn){
+  document.querySelectorAll('.reg-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('modoUnitario').style.display = mode==='unitario'?'block':'none';
+  document.getElementById('modoLote').style.display     = mode==='lote'?'block':'none';
+  if(mode==='lote' && !document.getElementById('loteRows').children.length) addLoteRow();
+}
+
+// ── STATUS ──
+function setStatus(s, btn){
+  document.querySelectorAll('#statusBtns .status-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  statusSel = s;
+}
+
+// ── TOAST ──
+function toast(msg, err=false){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast show'+(err?' err':'');
+  setTimeout(()=>t.className='toast',2800);
+}
+
+// ── RENDER ROW ──
+function statusTag(s){
+  if(s==='ok')      return '<span class="tag-ok">✅ OK</span>';
+  if(s==='parcial') return '<span class="tag-parcial">⚠️ Parcial</span>';
+  return '<span class="tag-erro">❌ Erro</span>';
+}
+function fmtDate(d){ return d?d.split('-').reverse().join('/'):'—'; }
+
+function renderRow(r, prepend=false){
+  const tbody = document.getElementById('regTbody');
+  const tr = document.createElement('tr');
+  tr.dataset.id = r.id;
+  tr.innerHTML = `<td style="white-space:nowrap">${fmtDate(r.data_teste)}</td>
+    <td>${r.cenario||'—'}</td>
+    <td>${r.fornecedor||'—'}</td>
+    <td style="white-space:nowrap">${r.valor||'—'}</td>
+    <td>${statusTag(r.status)}</td>
+    <td style="max-width:240px">${r.observacao||'—'}</td>
+    <td><button class="btn-del-reg" onclick="delReg('${r.id}',this)">✕</button></td>`;
+  if(prepend && tbody.firstChild) tbody.insertBefore(tr, tbody.firstChild);
+  else tbody.appendChild(tr);
+  document.getElementById('regTableWrap').style.display='block';
+  document.getElementById('regEmpty').style.display='none';
+  updateCount();
+}
+
+function updateCount(){
+  const n=document.getElementById('regTbody').children.length;
+  document.getElementById('regCount').textContent=n+(n===1?' registro':' registros');
+}
+
+async function delReg(id, btn){
+  if(!confirm('Remover este registro?')) return;
+  await fetch(`${SUPA}/rest/v1/${TREG}?id=eq.${id}`,{method:'DELETE',headers:H});
+  btn.closest('tr').remove();
+  updateCount();
+  if(!document.getElementById('regTbody').children.length){
+    document.getElementById('regTableWrap').style.display='none';
+    document.getElementById('regEmpty').style.display='block';
+  }
+}
+
+// ── UNITÁRIO ──
+function clearUnitario(){
+  document.getElementById('reg_data').value=today();
+  document.getElementById('reg_cenario').value='';
+  document.getElementById('reg_fornecedor').value='';
+  document.getElementById('reg_valor').value='';
+  document.getElementById('reg_obs').value='';
+  document.querySelectorAll('#statusBtns .status-btn').forEach(b=>b.classList.remove('selected'));
+  statusSel='';
+}
+
+async function addUnitario(){
+  const cenario=document.getElementById('reg_cenario').value;
+  if(!cenario){toast('Selecione o cenário testado',true);return;}
+  if(!statusSel){toast('Marque o status (OK, Parcial ou Erro)',true);return;}
+  const row={data_teste:document.getElementById('reg_data').value||today(),cenario,
+    fornecedor:document.getElementById('reg_fornecedor').value.trim(),
+    valor:document.getElementById('reg_valor').value.trim(),
+    status:statusSel,
+    observacao:document.getElementById('reg_obs').value.trim(),
+    created_at:new Date().toISOString()};
+  try{
+    const res=await fetch(`${SUPA}/rest/v1/${TREG}`,{method:'POST',headers:H,body:JSON.stringify(row)});
+    const rows=await res.json();
+    if(rows&&rows[0]){renderRow(rows[0],true);clearUnitario();toast('Registro salvo! ✓');}
+    else{toast('Erro ao salvar',true);console.error(rows);}
+  }catch(e){toast('Erro de conexão',true);}
+}
+
+// ── LOTE ──
+const CENARIOS=[
+  '','1 — Login com e-mail corporativo','2 — Login com e-mail não cadastrado',
+  '3 — Upload NF nacional (boleto)','4 — Upload invoice internacional',
+  '5 — NF com imposto / retenção','6 — NF duplicada','7 — Trocar NF após preenchimento',
+  '8 — Fornecedor existente na base','9 — Fornecedor novo','10 — NF emitida para empresa errada',
+  '11 — Frequência Parcelado','12 — Pagamento TED — campo banco','13 — Campo descrição automático',
+  '14 — Data da despesa — reembolso','15 — Fluxo internacional','16 — Envio completo de solicitação',
+  '17 — Tela de resumo antes do envio','18 — Solicitar ajuste após envio',
+  '19 — Minhas solicitações','20 — Notificação Slack'
+];
+
+function addLoteRow(){
+  const wrap=document.getElementById('loteRows');
+  const idx=wrap.children.length;
+  const opts=CENARIOS.map((c,i)=>`<option value="${c}"${i===0?'':''} >${c||'Selecione...'}</option>`).join('');
+  const div=document.createElement('div');
+  div.className='lote-row';
+  div.innerHTML=`
+    <input type="date" value="${today()}" class="lr-data">
+    <select class="lr-cenario">${opts}</select>
+    <input type="text" placeholder="Fornecedor (opcional)" class="lr-forn">
+    <input type="text" placeholder="O que aconteceu..." class="lr-obs">
+    <select class="lr-status">
+      <option value="">Status...</option>
+      <option value="ok">✅ OK</option>
+      <option value="parcial">⚠️ Parcial</option>
+      <option value="erro">❌ Erro</option>
+    </select>
+    <button class="btn-del-lote" onclick="this.closest('.lote-row').remove()">✕</button>`;
+  wrap.appendChild(div);
+}
+
+async function salvarLote(){
+  const rows=document.querySelectorAll('#loteRows .lote-row');
+  const valid=[];
+  rows.forEach(row=>{
+    const cenario=row.querySelector('.lr-cenario').value;
+    const status =row.querySelector('.lr-status').value;
+    if(!cenario||!status) return;
+    valid.push({
+      data_teste:row.querySelector('.lr-data').value||today(),
+      cenario,
+      fornecedor:row.querySelector('.lr-forn').value.trim(),
+      observacao:row.querySelector('.lr-obs').value.trim(),
+      valor:'',status,
+      created_at:new Date().toISOString()
+    });
+  });
+  if(!valid.length){toast('Preencha cenário e status em pelo menos uma linha',true);return;}
+  try{
+    const res=await fetch(`${SUPA}/rest/v1/${TREG}`,{method:'POST',headers:H,body:JSON.stringify(valid)});
+    const saved=await res.json();
+    if(saved&&saved.length){
+      saved.forEach(r=>renderRow(r,true));
+      document.getElementById('loteRows').innerHTML='';
+      addLoteRow();
+      toast(`${saved.length} registro(s) salvos! ✓`);
+    }else{toast('Erro ao salvar lote',true);console.error(saved);}
+  }catch(e){toast('Erro de conexão',true);}
+}
+
+// ── LOAD REGISTROS ──
+async function loadRegistros(){
+  try{
+    const res=await fetch(`${SUPA}/rest/v1/${TREG}?order=created_at.desc`,{headers:H});
+    const rows=await res.json();
+    if(rows&&rows.length){
+      rows.forEach(r=>renderRow(r));
+    } else {
+      document.getElementById('regEmpty').style.display='block';
+    }
+  }catch(e){console.error(e);}
+}
+
+// ── FEEDBACK ──
+function setNPS(val,btn){
+  document.querySelectorAll('#npsRow .nps-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  fbSels.nota=val;
+  autoSaveFb();
+}
+
+function selCard(el,group,val){
+  document.querySelectorAll(`#${group} .select-card`).forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  fbSels[group]=val;
+  autoSaveFb();
+}
+
+function autoSaveFb(){
+  clearTimeout(fbTimer);
+  fbTimer=setTimeout(salvarFeedback,1200);
+}
+
+async function salvarFeedback(){
+  const data={
+    nota_geral: fbSels.nota!==undefined?fbSels.nota:null,
+    comparacao: fbSels.comparacao||null,
+    tempo_antes: document.getElementById('fb_tempo_antes').value,
+    tempo_novo:  document.getElementById('fb_tempo_novo').value,
+    positivo:    document.getElementById('fb_positivo').value.trim(),
+    negativo:    document.getElementById('fb_negativo').value.trim(),
+    sugestoes:   document.getElementById('fb_sugestoes').value.trim(),
+    livre:       document.getElementById('fb_livre').value.trim(),
+    updated_at:  new Date().toISOString()
+  };
+  try{
+    let res;
+    if(fbId){
+      res=await fetch(`${SUPA}/rest/v1/${TFB}?id=eq.${fbId}`,{method:'PATCH',headers:H,body:JSON.stringify(data)});
+    }else{
+      res=await fetch(`${SUPA}/rest/v1/${TFB}`,{method:'POST',headers:H,body:JSON.stringify(data)});
+      const rows=await res.json();
+      if(rows&&rows[0]) fbId=rows[0].id;
+    }
+    const s=document.getElementById('fbSaved');
+    s.classList.add('show');
+    setTimeout(()=>s.classList.remove('show'),2500);
+  }catch(e){console.error(e);}
+}
+
+// ── UTILS ──
+function today(){ return new Date().toISOString().slice(0,10); }
+
+// ── INIT ──
+document.getElementById('reg_data').value=today();
+loadRegistros();
+addLoteRow();
+</script>
+</body>
+</html>
