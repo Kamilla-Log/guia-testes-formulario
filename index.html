@@ -77,6 +77,17 @@ body{background:#F5F6FC;font-family:'Poppins',sans-serif;font-size:14px;color:#0
 .btn-del-reg:hover{color:#C70404}
 .empty-msg{text-align:center;padding:24px 0;font-size:12px;color:#bbb}
 
+/* ── DASHBOARD RESUMO ── */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stat-card{border-radius:12px;padding:14px 12px;text-align:center;border:1.5px solid}
+.stat-num{font-family:'Funnel Display',sans-serif;font-size:26px;font-weight:800;line-height:1}
+.stat-lbl{font-size:11px;font-weight:600;margin-top:5px;letter-spacing:.02em}
+.stat-total{background:#F3EDFC;border-color:#E2D0FA;color:#2D085D}
+.stat-ok{background:#E8F8F0;border-color:#1FAC66;color:#0D5C36}
+.stat-parcial{background:#FFF3E0;border-color:#FE8F1C;color:#7A3B00}
+.stat-erro{background:#FDEAEA;border-color:#C70404;color:#C70404}
+@media(max-width:560px){.stats-bar{grid-template-columns:repeat(2,1fr)}}
+
 /* ── FEEDBACK GERAL ── */
 .fb-section{margin-bottom:20px}
 .fb-section-title{font-size:11px;font-weight:700;color:#6613D0;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;display:flex;align-items:center;gap:6px}
@@ -144,7 +155,7 @@ body{background:#F5F6FC;font-family:'Poppins',sans-serif;font-size:14px;color:#0
     <p>Use seu e-mail corporativo Logcomex para fazer login. Em caso de problema de acesso, fale com Kamilla ou Thaiane (CP).</p>
     <div class="link-box">
       <span>🔗</span>
-      <a href="https://pagamentos-logcomexv3.pages.dev" target="_blank">pagamentos-logcomexv3.pages.dev</a>
+      <a href="https://formulario-pagamentos.pages.dev/" target="_blank">formulario-pagamentos.pages.dev</a>
     </div>
   </div>
 
@@ -152,6 +163,14 @@ body{background:#F5F6FC;font-family:'Poppins',sans-serif;font-size:14px;color:#0
   <div class="card">
     <div class="card-title"><div class="icon">📋</div>Registro de Testes — Caso a Caso</div>
     <p style="margin-bottom:14px">Para cada solicitação que você enviar pelo formulário, registre aqui o resultado. O time CP acompanha em tempo real.</p>
+
+    <!-- resumo / dashboard -->
+    <div class="stats-bar">
+      <div class="stat-card stat-total"><div class="stat-num" id="statTotal">0</div><div class="stat-lbl">Total</div></div>
+      <div class="stat-card stat-ok"><div class="stat-num" id="statOk">0</div><div class="stat-lbl">✅ OK</div></div>
+      <div class="stat-card stat-parcial"><div class="stat-num" id="statParcial">0</div><div class="stat-lbl">⚠️ Parcial</div></div>
+      <div class="stat-card stat-erro"><div class="stat-num" id="statErro">0</div><div class="stat-lbl">❌ Erro</div></div>
+    </div>
 
     <!-- tabs -->
     <div class="reg-tabs">
@@ -391,6 +410,7 @@ function renderRow(r, prepend=false){
   const tbody = document.getElementById('regTbody');
   const tr = document.createElement('tr');
   tr.dataset.id = r.id;
+  tr.dataset.status = r.status||'';
   tr.innerHTML = `<td style="white-space:nowrap">${fmtDate(r.data_teste)}</td>
     <td>${r.cenario||'—'}</td>
     <td>${r.fornecedor||'—'}</td>
@@ -408,6 +428,20 @@ function renderRow(r, prepend=false){
 function updateCount(){
   const n=document.getElementById('regTbody').children.length;
   document.getElementById('regCount').textContent=n+(n===1?' registro':' registros');
+  updateStats();
+}
+
+function updateStats(){
+  const trs=[...document.querySelectorAll('#regTbody tr')];
+  let ok=0,parcial=0,erro=0;
+  trs.forEach(t=>{
+    const s=t.dataset.status;
+    if(s==='ok')ok++; else if(s==='parcial')parcial++; else if(s==='erro')erro++;
+  });
+  document.getElementById('statTotal').textContent=trs.length;
+  document.getElementById('statOk').textContent=ok;
+  document.getElementById('statParcial').textContent=parcial;
+  document.getElementById('statErro').textContent=erro;
 }
 
 async function delReg(id, btn){
