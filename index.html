@@ -509,7 +509,8 @@
   <div class="header-inner">
     <div class="eyebrow">Logcomex · Contas a Pagar</div>
     <h1>Guia de Testes — Novo Formulário de Pagamentos</h1>
-    <p class="sub">Período de testes: 2 semanas · Seus registros são salvos automaticamente no navegador.<br>Toda informação aqui ajuda o time CP a corrigir bugs e medir maturidade.</p>
+    <p class="sub">Período de testes: 2 semanas · Os registros vão para a base compartilhada do time — todos veem em tempo real.<br>Toda informação aqui ajuda o time CP a corrigir bugs e medir maturidade.</p>
+    <p class="sub" id="sb-status" style="font-size:12px;font-weight:600;margin-top:6px">⏳ Conectando à base compartilhada...</p>
   </div>
 </div>
 
@@ -906,7 +907,7 @@
 
   <div class="footer">
     Dúvidas? Fale com <strong>Kamilla</strong> ou <strong>Thaiane</strong> — Contas a Pagar Logcomex<br>
-    <span style="font-size: 11px; opacity: 0.6;">Dados ficam no seu navegador (localStorage). Use o botão "⬇️ JSON" para fazer backup.</span>
+    <span style="font-size: 11px; opacity: 0.6;">Os dados são salvos na base compartilhada do time (Supabase) e ficam também em cache no navegador. Use "⬇️ JSON" / "⬇️ CSV" para backup.</span>
   </div>
 
 </div>
@@ -983,6 +984,70 @@ let state = {
   severidade: null,
   feedback: { nota: null, comparacao: null }
 };
+
+/* ============== SUPABASE (base compartilhada do time) ============== */
+const SB_URL  = 'https://moikuofjjyvleorbfhay.supabase.co';
+const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vaWt1b2Zqanl2bGVvcmJmaGF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2ODYyOTgsImV4cCI6MjA5NzI2MjI5OH0.IL-sCw1Pi-QNSPfTVeeI6WEjbnUoGKVCJ6lYdm0aD6o';
+const SB_H    = { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' };
+const SB_TREG = 'testes_v2';
+const SB_TFB  = 'feedback_v2';
+let sbOnline = false;
+
+/* id de feedback por navegador (cada testador tem o seu) */
+function fbId() {
+  let id = localStorage.getItem('logcomex_fb_id');
+  if (!id) { id = 'fb_' + uid(); localStorage.setItem('logcomex_fb_id', id); }
+  return id;
+}
+
+async function sbLoadRegistros() {
+  const res = await fetch(`${SB_URL}/rest/v1/${SB_TREG}?select=payload&order=criado_em.asc`, { headers: SB_H });
+  if (!res.ok) throw new Error('GET registros ' + res.status);
+  return (await res.json()).map(r => r.payload);
+}
+async function sbInsertRegistros(regs) {
+  const arr = Array.isArray(regs) ? regs : [regs];
+  const body = arr.map(r => ({ id: r.id, payload: r, criado_em: r.criadoEm || new Date().toISOString() }));
+  const res = await fetch(`${SB_URL}/rest/v1/${SB_TREG}`, { method: 'POST', headers: { ...SB_H, Prefer: 'return=minimal' }, body: JSON.stringify(body) });
+  if (!res.ok) throw new Error('POST registros ' + res.status);
+}
+async function sbDeleteRegistro(id) {
+  const res = await fetch(`${SB_URL}/rest/v1/${SB_TREG}?id=eq.${encodeURIComponent(id)}`, { method: 'DELETE', headers: SB_H });
+  if (!res.ok) throw new Error('DELETE registro ' + res.status);
+}
+async function sbDeleteTodos() {
+  const res = await fetch(`${SB_URL}/rest/v1/${SB_TREG}?id=neq.${encodeURIComponent('__nao_existe__')}`, { method: 'DELETE', headers: SB_H });
+  if (!res.ok) throw new Error('DELETE todos ' + res.status);
+}
+async function sbLoadFeedback() {
+  const res = await fetch(`${SB_URL}/rest/v1/${SB_TFB}?id=eq.${encodeURIComponent(fbId())}&select=payload`, { headers: SB_H });
+  if (!res.ok) throw new Error('GET feedback ' + res.status);
+  const rows = await res.json();
+  return rows.length ? rows[0].payload : null;
+}
+async function sbSaveFeedback(fb) {
+  const body = { id: fbId(), payload: fb, atualizado_em: new Date().toISOString() };
+  const res = await fetch(`${SB_URL}/rest/v1/${SB_TFB}`, { method: 'POST', headers: { ...SB_H, Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify(body) });
+  if (!res.ok) throw new Error('UPSERT feedback ' + res.status);
+}
+
+/* sincronização "dispara e esquece" com aviso de status */
+function setSbBadge(online) {
+  sbOnline = online;
+  const el = document.getElementById('sb-status');
+  if (el) {
+    el.textContent = online ? '🟢 Base compartilhada conectada' : '🔴 Sem conexão com a base (salvo local — vai sincronizar ao reconectar)';
+    el.style.color = online ? '#1FAC66' : '#C70404';
+  }
+}
+function syncInsert(regs) {
+  sbInsertRegistros(regs).then(() => setSbBadge(true))
+    .catch(e => { setSbBadge(false); console.warn('Falha ao sincronizar registro(s):', e); });
+}
+function syncDelete(id) {
+  sbDeleteRegistro(id).then(() => setSbBadge(true))
+    .catch(e => { setSbBadge(false); console.warn('Falha ao apagar no servidor:', e); });
+}
 
 /* ============== UTILS ============== */
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
@@ -1133,6 +1198,7 @@ function salvarUnit() {
   };
   state.registros.push(reg);
   save();
+  syncInsert(reg);
   showAlert('alert-salvo');
   limparForm();
   renderTudo();
@@ -1185,6 +1251,7 @@ function salvarLote() {
   const c = document.getElementById('lote-rows');
   const rows = c.querySelectorAll('.lote-row');
   let saved = 0;
+  const novos = [];
   const fp = detectarBrowser();
   rows.forEach((r, i) => {
     if (i === 0) return; /* header row */
@@ -1206,10 +1273,12 @@ function salvarLote() {
       criadoEm: new Date().toISOString()
     };
     state.registros.push(reg);
+    novos.push(reg);
     saved++;
   });
   if (saved > 0) {
     save();
+    syncInsert(novos);
     showAlert('alert-lote', `✓ ${saved} registro(s) salvo(s).`);
     limparLote();
     renderTudo();
@@ -1303,6 +1372,7 @@ function apagarReg(id) {
   if (!confirm('Apagar esse registro?')) return;
   state.registros = state.registros.filter(r => r.id !== id);
   save();
+  syncDelete(id);
   renderTudo();
 }
 
@@ -1311,6 +1381,7 @@ function apagarTodos() {
   if (!confirm('Tem certeza absoluta? Faça o backup com "⬇️ JSON" antes.')) return;
   state.registros = [];
   save();
+  sbDeleteTodos().then(() => setSbBadge(true)).catch(e => { setSbBadge(false); console.warn('Falha ao apagar todos no servidor:', e); });
   renderTudo();
 }
 
@@ -1549,6 +1620,7 @@ function salvarFeedback() {
   state.feedback.livre = document.getElementById('fb-livre').value;
   state.feedback.atualizadoEm = new Date().toISOString();
   saveFeedback();
+  sbSaveFeedback(state.feedback).then(() => setSbBadge(true)).catch(e => { setSbBadge(false); console.warn('Falha ao sincronizar feedback:', e); });
   showAlert('alert-fb');
 }
 
@@ -1579,7 +1651,7 @@ function showAlert(id, msg) {
 }
 
 /* ============== INIT ============== */
-function init() {
+async function init() {
   load();
   popularCenarios();
   bindPills('r-status-pills', (v) => { state.status = v; toggleCondicionalErro(); });
@@ -1595,6 +1667,30 @@ function init() {
   addLoteRow();
   renderTudo();
   console.log('%c[Guia de testes Logcomex v2 carregado]', 'background:#6613D0;color:white;padding:3px 8px;border-radius:3px');
+
+  /* base compartilhada: mescla cache local com o que está no servidor (por id),
+     e sobe automaticamente os registros locais que ainda não foram sincronizados
+     (recupera quem usou a versão antiga sem Supabase) */
+  try {
+    const local = state.registros.slice();
+    const remote = await sbLoadRegistros();
+    const byId = {};
+    remote.forEach(r => { if (r && r.id) byId[r.id] = r; });
+    const faltam = local.filter(r => r && r.id && !byId[r.id]);
+    if (faltam.length) {
+      await sbInsertRegistros(faltam);
+      faltam.forEach(r => byId[r.id] = r);
+    }
+    state.registros = Object.values(byId).sort((a, b) => String(a.criadoEm || '').localeCompare(String(b.criadoEm || '')));
+    save();
+    setSbBadge(true);
+    const fb = await sbLoadFeedback();
+    if (fb) { state.feedback = fb; saveFeedback(); carregarFeedback(); }
+    renderTudo();
+  } catch (e) {
+    setSbBadge(false);
+    console.warn('Supabase indisponível no load — usando cache local:', e);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', init);
